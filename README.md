@@ -6,5 +6,5 @@ Expected bonus:
 -password
 -norme RFC959
 -colors
--rights verification
+-rights check
 -prompt
