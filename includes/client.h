@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/10 00:44:17 by ghilbert          #+#    #+#             */
-/*   Updated: 2015/05/10 00:44:42 by ghilbert         ###   ########.fr       */
+/*   Created: 2015/05/09 22:56:02 by lscopel           #+#    #+#             */
+/*   Updated: 2015/05/10 01:01:52 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#ifndef SERVER_H
+# define SERVER_H
+# include "ft_p.h"
 
 #endif
