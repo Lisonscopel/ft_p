@@ -3,56 +3,101 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+         #
+#    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/09 21:52:56 by tlepeche         ###   ########.fr        #
+#    Updated: 2015/05/10 00:42:42 by ghilbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-NAME_S= serveur
-NAME_C= client
 
-SRC_S= server.c \
-SRC_C= client.c \
+NAME_S		= server
+NAME_C		= client
 
-OBJDIR_C= OBJ_C /
-OBJDIR_S= OBJ_S /
+BIN_PATH	= bin/
 
-OBJ_S= $(SRC_S:%.c=$(OBJDIR_S)%.o)
-OBJ_C= $(SRC_C:%.c=$(OBJDIR_C)%.o)
+SRC_PATH	= src/
+SRC_S_PATH	= $(NAME_S)/
+SRC_C_PATH	= $(NAME_C)/
 
-CC= gcc
+OBJ_PATH	= obj/
 
-CFLAGS= -Wextra -Wall -Werror
+INC_PATH	= includes/
+INCLUDES	= -I $(INC_PATH) -I libft/includes
 
-RM= rm -rf
+SRC_S_NAME	=	server.c
 
-all: lib $(NAME_S) $(NAME_C)
+SRC_C_NAME	=	client.c
+				
+HEADER 		=	$(INC_PATH)ft_p.h \
+				$(INC_PATH)server.h \
+				$(INC_PATH)client.h
 
-lib:
-	make -C libft/
+LIBFT_PATH	= libft
+LIBFT_NAME	= -lft
+LIBFT		= -L$(LIBFT_PATH) $(LIBFT_NAME)
 
-$(NAME_S): $(OBJ_S) $(LIB)
-	$(CC) $(CFLAGS) -o $(NAME_S) $(OBJ_S) -L libft/ -lft
+LIBS		= $(LIBFT)
 
-$(NAME_C): $(OBJ_C) $(LIB)
-	$(CC) $(CFLAGS) -o $(NAME_C) $(OBJ_C) -L libft/ -lft
+CC			= gcc
+CFLAGS		+= -Wall -Werror -Wextra
 
-$(OBJDIR_S)%.o:%.c
-	@mkdir -p $(OBJDIR_S)
-	$(CC) $(CFLAGS) -I includes -c $< -o $@
+SRC_S		= $(addprefix $(SRC_S_PATH),$(SRC_S_NAME))
+SRC_C		= $(addprefix $(SRC_C_PATH),$(SRC_C_NAME))
 
-$(OBJDIR_C)%.o:%.c
-	@mkdir -p $(OBJDIR_C)
-	$(CC) $(CFLAGS) -I includes -c $< -o $@
+OBJS_S 		= $(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_S)))
+OBJS_C 		= $(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_C)))
+
+BIN_S		= $(addprefix $(BIN_PATH),$(NAME_S))
+BIN_C		= $(addprefix $(BIN_PATH),$(NAME_C))
+
+
+.PHONY: all clean fclean re proper debug debugall
+
+all: $(NAME_S) $(NAME_C)
+
+$(NAME_S): $(BIN_S)
+$(NAME_C): $(BIN_C)
+
+$(BIN_S): libft/libft.a $(OBJS_S) | $(BIN_PATH)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_S) -o $(BIN_S) $(LIBS)
+
+$(BIN_C): libft/libft.a $(OBJS_C) | $(BIN_PATH)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_C) -o $(BIN_C) $(LIBS)
+
+libft/libft.a:
+	make -C libft
+
+$(OBJS_S): | $(OBJ_PATH)
+$(OBJS_C): | $(OBJ_PATH)
+
+$(OBJ_PATH)%.o : $(SRC_PATH)%.c $(HEADER)
+	$(CC) -c $(CFLAGS) $< -o $@ $(INCLUDES)
+
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)$(NAME_S)
+	@mkdir -p $(OBJ_PATH)$(NAME_C)
+
+$(BIN_PATH):
+	@mkdir -p $(BIN_PATH)
 
 clean:
-	$(RM) $(OBJDIR_S)
-	$(RM) $(OBJDIR_C)
+	@make clean -C libft
+	rm -rf $(OBJS)
+	rm -rf $(OBJ_PATH)
 
 fclean: clean
-	$(RM) $(NAME_S)
-	$(RM) $(NAME_C)
-	make -C libft/ fclean
+	rm -rf libft/libft.a
+	rm -rf $(BIN_PATH)
 
-re: fclean all
+proper: all clean
+
+re:	fclean all
+
+debug:
+	CFLAGS="-g" make
+
+debugall:
+	CFLAGS="-g" make re
+
+
