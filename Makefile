@@ -25,6 +25,7 @@ INC_PATH	= includes/
 INCLUDES	= -I $(INC_PATH) -I libft/includes -I libnetwork/includes
 
 SRC_S_NAME	=	server.c \
+				dial_client.c \
 				password.c
 
 SRC_C_NAME	=	client.c
@@ -65,10 +66,10 @@ $(NAME_S): $(BIN_S)
 $(NAME_C): $(BIN_C)
 
 $(BIN_S): libft/libft.a libnetwork/libnetwork.a $(OBJS_S) | $(BIN_PATH)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_S) -o $(BIN_S) $(LIBS)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_S) -o $(BIN_S) $(LIBS)
 
 $(BIN_C): libft/libft.a libnetwork/libnetwork.a $(OBJS_C) | $(BIN_PATH)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_C) -o $(BIN_C) $(LIBS)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_C) -o $(BIN_C) $(LIBS)
 
 libft/libft.a:
 	make -C libft

@@ -22,7 +22,19 @@
 
 # include "libft.h"
 
+/*
+**server
+*/
 int		serv_create_tcp(int port);
+ 
+/*
+**client
+*/
+int		client_create_tcp(char *addr, int port);
+
+/*
+**both
+*/
 
 
 #endif

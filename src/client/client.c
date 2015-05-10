@@ -12,35 +12,6 @@
 
 #include "client.h"
 
-void	usage(char *str)
-{
-	ft_putstr("Usage: ");
-	ft_putstr(str);
-	ft_putendl(" <addr> <port>");
-	exit (-1);
-}
-
-int		create_client(char *addr, int port)
-{
-	int					sock;
-	struct protoent		*prot;
-	struct sockaddr_in	sin;
-
-	prot = getprotobyname("tcp");
-	if (!prot)
-		return (-1);
-	sock = socket(PF_INET, SOCK_STREAM, prot->p_proto);
-	sin.sin_family = AF_INET;
-	sin.sin_port = htons(port);
-	sin.sin_addr.s_addr = inet_addr(addr);
-	if (connect(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
-	{
-		ft_putstr("Connection error\n");
-		exit (2);
-	}
-	return (sock);
-}
-
 int		main(int ac, char **av)
 {
 	int		port;
@@ -51,9 +22,9 @@ int		main(int ac, char **av)
 	char	*line;
 
 	if (ac != 3)
-		usage(av[0]);
+		ft_usage(av[0], " <addr> <port>");
 	port = ft_atoi(av[2]);
-	sock = create_client(av[1], port);
+	sock = client_create_tcp(av[1], port);
 	while (1)
 	{
 		ft_putstr("client> ");

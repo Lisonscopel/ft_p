@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   serv_create_tcp.c                                  :+:      :+:    :+:   */
+/*   client_create_tcp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lscopel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/10 14:14:15 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 15:20:33 by ghilbert         ###   ########.fr       */
+/*   Created: 2015/05/10 16:09:53 by lscopel           #+#    #+#             */
+/*   Updated: 2015/05/10 16:09:56 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libnetwork.h"
 
-int		serv_create_tcp(int port)
+int		client_create_tcp(char *addr, int port)
 {
 	int					sock;
 	struct protoent		*prot;
@@ -24,12 +24,11 @@ int		serv_create_tcp(int port)
 	sock = socket(PF_INET, SOCK_STREAM, prot->p_proto);
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);
-	sin.sin_addr.s_addr = htonl(INADDR_ANY);
-	if (bind(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
+	sin.sin_addr.s_addr = inet_addr(addr);
+	if (connect(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
 	{
-		ft_putstr("Bind error\n");
+		ft_putstr("Connection error\n");
 		exit (2);
 	}
-	listen(sock, 42);
 	return (sock);
 }

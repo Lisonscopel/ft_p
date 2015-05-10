@@ -12,7 +12,8 @@
 
 NAME = libnetwork.a
 
-SRCS = serv_create_tcp.c
+SRCS = serv_create_tcp.c \
+		client_create_tcp.c
 
 OBJS = $(SRCS:.c=.o)
 

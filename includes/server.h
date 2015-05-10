@@ -15,5 +15,6 @@
 # include "ft_p.h"
 
 int		login(void);
+void	dial_client(int cs);
 
 #endif
