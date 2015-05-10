@@ -8,3 +8,5 @@ Expected bonus:
 -colors
 -rights check
 -prompt
+
+made by ghilbert, tlepeche, vpailhe, sduprey, lscopel
