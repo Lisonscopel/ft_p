@@ -6,17 +6,11 @@
 /*   By: sduprey <sduprey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/09 18:40:29 by sduprey          ###   ########.fr       */
+/*   Updated: 2015/05/10 02:05:08 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include "server.h" 
 
 void	usage(char *str)
 {
@@ -64,6 +58,8 @@ int		main(int ac, char **av)
 	while ((r = read(cs, buf, 1023)) > 0)
 	{
 		buf[r] = '\0';
+		if (login() == 1)
+			return (-1);
 		printf("received %d bytes: %s\n", r, buf);
 	}
 	close(cs);

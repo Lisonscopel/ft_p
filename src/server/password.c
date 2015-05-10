@@ -6,11 +6,11 @@
 /*   By: vpailhe <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 22:40:04 by vpailhe           #+#    #+#             */
-/*   Updated: 2015/05/10 01:36:01 by vpailhe          ###   ########.fr       */
+/*   Updated: 2015/05/10 02:04:14 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "server.h"
 
 char		*ask(char *s)
 {
@@ -26,7 +26,7 @@ char		*ask(char *s)
 
 int			equal_find(char *s)
 {
-	int		i;
+	size_t		i;
 
 	i = 0;
 	while(s[i] != '=' && s[i])
@@ -47,7 +47,7 @@ char		*parse_me(char *s)
 	return (s);
 }
 
-int			password(char *s, char *line)
+int			password(char *line)
 {
 	char	*ans;
 	char	*mdp;
@@ -76,7 +76,7 @@ int			login(void)
 		eq = equal_find(line);
 		if (!(strncmp(ans, line, eq)))
 		{
-			if (password(ans, line))
+			if (password(line))
 				return (1);
 			close(fd);
 			return (0);
@@ -87,10 +87,12 @@ int			login(void)
 	return (0);
 }
 
-int			main(int argc, char **argv)
+/*int			main(int ac, char **av)
 {
+	(void)ac;
+	(void)av;
 	if (login() == 1)
 		return (1);
 	else
 		return (0);
-}
+}*/

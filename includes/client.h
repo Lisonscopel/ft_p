@@ -6,15 +6,12 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 22:56:02 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 01:45:05 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/10 02:02:43 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLIENT_H
 # define CLIENT_H
 # include "ft_p.h"
-# include <fcntl.h>
-
-int		login(void);
 
 #endif
