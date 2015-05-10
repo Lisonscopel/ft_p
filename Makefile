@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/10 00:42:42 by ghilbert         ###   ########.fr        #
+#    Updated: 2015/05/10 01:49:14 by lscopel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ OBJ_PATH	= obj/
 INC_PATH	= includes/
 INCLUDES	= -I $(INC_PATH) -I libft/includes
 
-SRC_S_NAME	=	server.c
+SRC_S_NAME	=	server.c \
+				password.c
 
 SRC_C_NAME	=	client.c
 				
