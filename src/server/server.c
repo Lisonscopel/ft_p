@@ -6,41 +6,11 @@
 /*   By: sduprey <sduprey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/10 02:05:08 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/10 14:16:53 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h" 
-
-void	usage(char *str)
-{
-	ft_putstr("Usage: ");
-	ft_putstr(str);
-	ft_putendl(" <port>");
-	exit (-1);
-}
-
-int		create_serv(int port)
-{
-	int					sock;
-	struct protoent		*prot;
-	struct sockaddr_in	sin;
-
-	prot = getprotobyname("tcp");
-	if (!prot)
-		return (-1);
-	sock = socket(PF_INET, SOCK_STREAM, prot->p_proto);
-	sin.sin_family = AF_INET;
-	sin.sin_port = htons(port);
-	sin.sin_addr.s_addr = htonl(INADDR_ANY);
-	if (bind(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
-	{
-		ft_putstr("Bind error\n");
-		exit (2);
-	}
-	listen(sock, 42);
-	return (sock);
-}
 
 int		main(int ac, char **av)
 {
@@ -59,7 +29,7 @@ int		main(int ac, char **av)
 	char				*pwd;
 
 	if (ac != 2)
-		usage(av[0]);
+		ft_usage(av[0], " <port>");
 	stop = 0;
 	port = ft_atoi(av[1]);
 	sock = create_serv(port);

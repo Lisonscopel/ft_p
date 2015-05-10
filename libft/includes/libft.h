@@ -6,7 +6,7 @@
 /*   By: lscopel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 01:33:10 by lscopel           #+#    #+#             */
-/*   Updated: 2015/03/29 22:49:37 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/10 14:12:03 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
+void				ft_usage(char *prog_name, char *args);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *s);
 char				*ft_strcat(char *s1, const char *s2);
