@@ -6,7 +6,7 @@
 /*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/10 19:55:57 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/10 20:45:21 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/10 22:05:31 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,31 @@ char	*get_root(void)
 
 int		dir_cmp(char *target, char *root)
 {
-	if (ft_strlen(target) < ft_strlen
+	int	i;
+
+	i = 0;
+	if (ft_strlen(target) < ft_strlen(root))
+		return(0);
+	else
+	{
+		while(root[i])
+		{
+			if (root[i] != target[i])
+				return (0);
+			i++;
+		}
+	}
+	return (1);
+}
+
+int	check_acess(char *path)
+{
+	char	*tmp_path;
+	int		nb;
+	int		i;
+
+	nb = how_many(path, '/');
+
 }
 
 void	ask_cd(char **av, int fd)
@@ -48,7 +72,7 @@ void	ask_cd(char **av, int fd)
 		{
 			chdir(tar_dir);
 			tar_dir = getcwd(tar_dir, 1024);
-			if (dir_cmp(tar_dir, root) == 0) //check si on est au dessus du root;
+			if (dir_cmp(tar_dir, root) == 1) //check si on est au dessus du root;
 			{
 				chdir(cur_dir);
 				return (0);
