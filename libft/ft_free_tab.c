@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/09 23:03:19 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 15:42:26 by ghilbert         ###   ########.fr       */
+/*   Created: 2015/01/26 08:48:14 by tlepeche          #+#    #+#             */
+/*   Updated: 2015/05/10 15:40:22 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_P_H
-# define FT_P_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/socket.h>
-# include <netdb.h>
-# include <netinet/in.h>
-# include <arpa/inet.h>
+#include "libft.h"
 
-# include "libft.h"
-# include "get_next_line.h"
-# include "libnetwork.h"
+void	ft_free_tab(char **tab)
+{
+	int i;
 
-#endif
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sduprey <sduprey@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/10 14:16:53 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/10 15:41:05 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		main(int ac, char **av)
 		ft_usage(av[0], " <port>");
 	stop = 0;
 	port = ft_atoi(av[1]);
-	sock = create_serv(port);
+	sock = serv_create_tcp(port);
 	cs = accept(sock, (struct sockaddr *)&csin, &cslen);
 	while ((ret = recv(cs, buf, 1023, 0)) > 0)
 	{
@@ -66,7 +66,7 @@ int		main(int ac, char **av)
 			ft_putnbr(ret);
 			ft_putstr(" bytes: ");
 			ft_putendl(buf);
-			free_tab(new_av);
+			ft_free_tab(new_av);
 		}
 	}
 	close(cs);

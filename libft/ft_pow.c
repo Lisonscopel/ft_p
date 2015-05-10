@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/09 23:03:19 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 15:42:26 by ghilbert         ###   ########.fr       */
+/*   Created: 2014/11/12 07:08:49 by ghilbert          #+#    #+#             */
+/*   Updated: 2014/11/12 08:42:35 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_P_H
-# define FT_P_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/socket.h>
-# include <netdb.h>
-# include <netinet/in.h>
-# include <arpa/inet.h>
+#include "libft.h"
 
-# include "libft.h"
-# include "get_next_line.h"
-# include "libnetwork.h"
+int	ft_pow(int n, int p)
+{
+	unsigned int	i;
+	int				res;
+	int				negpow;
+	unsigned int	pospow;
 
-#endif
+	res = n;
+	negpow = 0;
+	if (p == 0)
+		return (1);
+	else if (p < 0)
+	{
+		pospow = -p;
+		negpow = 1;
+	}
+	else
+		pospow = p;
+	i = 1;
+	while (i < pospow)
+	{
+		res *= n;
+		i++;
+	}
+	if (negpow)
+		res = 1 / res;
+	return (res);
+}
