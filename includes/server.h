@@ -14,7 +14,14 @@
 # define SERVER_H
 # include "ft_p.h"
 
-int		login(void);
-void	dial_client(int cs);
+typedef	struct		s_fct
+{
+	char			*name;
+	void			(*ptr_funct)(char **, int);
+	struct s_fct	*next;
+}					t_fct;
+
+int					login(void);
+void				dial_client(int cs);
 
 #endif
