@@ -17,11 +17,17 @@
 typedef	struct		s_fct
 {
 	char			*name;
-	void			(*ptr_funct)(char **, int);
+	int				(*ptr_funct)(char **, int);
 	struct s_fct	*next;
 }					t_fct;
 
 int					login(void);
-void				dial_client(int cs);
+void				dial_client(int cs, t_fct *list);
+void				init(t_fct **list);
+
+int	ask_list(char **new_av, int cs);
+int	ask_bonjour(char **new_av, int cs);
+int	ask_pwd(char **new_av, int cs);
+int	ask_quit(char **new_av, int cs);
 
 #endif

@@ -1,6 +1,6 @@
 #include "server.h"
 
-static void	list_add(t_fct **list, char *name, void (*ptr_fnc)())
+static void	list_add(t_fct **list, char *name, int (*ptr_fnc)())
 {
 	t_fct	*new;
 
@@ -8,7 +8,7 @@ static void	list_add(t_fct **list, char *name, void (*ptr_fnc)())
 	if (new != NULL)
 	{
 		new->name = name;
-		new->ptr_fnc = ptr_fnc;
+		new->ptr_funct = ptr_fnc;
 		if (*list == NULL)
 			new->next = NULL;
 		else
@@ -19,9 +19,7 @@ static void	list_add(t_fct **list, char *name, void (*ptr_fnc)())
 
 void		init(t_fct **list)
 {
-	t_fct	*list;
-	list = NULL;
-
+	*list = NULL;
 	list_add(list, "ls", &(ask_list));
 	list_add(list, "bonjour", &(ask_bonjour));
 	list_add(list, "pwd", &(ask_pwd));

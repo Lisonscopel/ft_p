@@ -26,7 +26,9 @@ INCLUDES	= -I $(INC_PATH) -I libft/includes -I libnetwork/includes
 
 SRC_S_NAME	=	server.c \
 				dial_client.c \
-				password.c
+				password.c \
+				init.c \
+				ask.c
 
 SRC_C_NAME	=	client.c
 				

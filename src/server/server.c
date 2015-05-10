@@ -22,6 +22,8 @@ int		main(int ac, char **av)
 	unsigned int		cslen;
 	struct sockaddr_in	csin;
 	int					stop;
+	t_fct				*list;
+
 
 	if (ac != 2)
 		ft_usage(av[0], " <port>");
@@ -29,13 +31,14 @@ int		main(int ac, char **av)
 	port = ft_atoi(av[1]);
 	sock = serv_create_tcp(port);
 
+	init(&list);
 
 	while (42)
 	{
 		cs = accept(sock, (struct sockaddr *)&csin, &cslen);
 		if (fork() == 0)
 		{
-			dial_client(cs);
+			dial_client(cs, list);
 			close(cs);
 			exit(0);
 		}
