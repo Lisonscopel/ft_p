@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/09 23:03:19 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 15:42:26 by ghilbert         ###   ########.fr       */
+/*   Created: 2014/11/05 11:25:47 by ghilbert          #+#    #+#             */
+/*   Updated: 2014/11/08 23:17:17 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_P_H
-# define FT_P_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/socket.h>
-# include <netdb.h>
-# include <netinet/in.h>
-# include <arpa/inet.h>
+#include "libft.h"
 
-# include "libft.h"
-# include "get_next_line.h"
-# include "libnetwork.h"
-
-#endif
+int	ft_isspace(int c)
+{
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
+		return (1);
+	else
+		return (0);
+}
