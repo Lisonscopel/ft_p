@@ -6,7 +6,7 @@
 /*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 20:44:08 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/11 21:09:18 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/11 21:18:01 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int		main(int ac, char **av)
 				ft_putendl("SUCCESS");
 				break;
 			}
-			//////// GET __FILE__ /////////
+			/////////////////////////// GET __FILE__ //////////////////////////
+			// la fonction put __file__ c'est la meme mais dans l'autre sens //
+			// ////////////////////////////////////////////////////////////////
 			if (ft_strncmp(line, "get ", 4) == 0)
 			{
 				ret2 = recv(sock, buf2, 1024, 0);
@@ -72,7 +74,10 @@ int		main(int ac, char **av)
 						write(fd, buf2, ft_strlen(buf2));
 						send(sock, "", 1, 0);
 					}
+					ft_putendl("SUCCESS");
 				}
+				else
+					ft_putendl("ERROR");
 			}
 			///////////////////////////
 			else
