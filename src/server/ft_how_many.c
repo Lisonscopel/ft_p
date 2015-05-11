@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_how_many.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/09 22:56:02 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/11 21:10:49 by tlepeche         ###   ########.fr       */
+/*   Created: 2015/01/25 01:34:03 by tlepeche          #+#    #+#             */
+/*   Updated: 2015/03/03 21:38:15 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
-# include "ft_p.h"
+#include "libft.h"
 
-int		how_many(char *str, char c);
+int		how_many(char *str, char c)
+{
+	int	i;
+	int result;
 
-#endif
+	i = 0;
+	result = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			result++;
+		i++;
+	}
+	return (result);
+}

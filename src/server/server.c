@@ -6,13 +6,11 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/10 15:41:05 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/11 16:57:23 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h" 
-
-
+#include "server.h"
 
 int		main(int ac, char **av)
 {
@@ -21,15 +19,11 @@ int		main(int ac, char **av)
 	int					cs;
 	unsigned int		cslen;
 	struct sockaddr_in	csin;
-	int					stop;
 
 	if (ac != 2)
 		ft_usage(av[0], " <port>");
-	stop = 0;
 	port = ft_atoi(av[1]);
 	sock = serv_create_tcp(port);
-
-
 	while (42)
 	{
 		cs = accept(sock, (struct sockaddr *)&csin, &cslen);

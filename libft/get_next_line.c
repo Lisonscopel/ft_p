@@ -3,82 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lscopel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/15 23:34:42 by lscopel           #+#    #+#             */
-/*   Updated: 2015/03/19 11:43:57 by lscopel          ###   ########.fr       */
+/*   Created: 2014/11/12 03:24:23 by tlepeche          #+#    #+#             */
+/*   Updated: 2015/05/11 19:48:58 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "get_next_line.h"
 
-int					count_lines(char *str)
+static int		create_line(char **temp, char *buf, char *rmning)
 {
-	unsigned int	i;
+	int i;
+	int j;
 
 	i = 0;
-	if (!str)
-		return (1);
-	while (str[i] && str[i] != '\n')
-		i++;
-	if (i == ft_strlen(str))
+	j = ft_strlen(*temp);
+	temp[0] = ft_realloc(*temp, (ft_strlen(*temp) + ft_strlen(buf) + 1));
+	while (buf[i] != '\0')
+	{
+		if (buf[i] == '\n')
+		{
+			*((*temp) + j) = '\0';
+			rmning = ft_strcpy(rmning, &buf[++i]);
+			return (1);
+		}
+		temp[0][j++] = buf[i++];
+	}
+	ft_bzero(rmning, ft_strlen(rmning));
+	*((*temp) + j) = '\0';
+	return (0);
+}
+
+static void		free_mem(char **buf, char **templine)
+{
+	free(*buf);
+	*buf = NULL;
+	free(*templine);
+	*templine = NULL;
+}
+
+static int		ending_file(char **line, char **templine, char **buf)
+{
+	*line = ft_strdup(*templine);
+	free_mem(buf, templine);
+	if (line[0] == '\0')
 		return (0);
 	return (1);
 }
 
-char				*makeline(char *str)
+int				get_next_line(int const fd, char **line)
 {
-	int				i;
-	char			*new;
-
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	new = ft_strnew(i + 1);
-	new = ft_strncpy(new, str, i);
-	return (new);
-}
-
-int					reader(int fd, char **stock)
-{
-	char			*ostock;
-	char			*s1;
+	static char		rmning[BUFF_SIZE];
 	int				ret;
+	char			*buf;
+	char			*templine;
 
-	s1 = ft_strnew(BUFF_SIZE + 1);
-	while (count_lines(*stock) != 1 && (ret = read(fd, s1, BUFF_SIZE)) > 0)
-	{
-		ostock = *stock;
-		*stock = ft_strjoin(*stock, s1);
-		free(ostock);
-		ft_bzero(s1, BUFF_SIZE + 1);
-	}
-	return (ret);
-}
-
-int					get_next_line(int fd, char **line)
-{
-	int				ret;
-	static char		*stock = NULL;
-	char			*ostock;
-	int				ll;
-
-	if (fd < 0 || line == NULL)
+	if (fd == -1)
 		return (-1);
-	if (!stock)
-		stock = ft_strnew(BUFF_SIZE + 1);
-	ret = reader(fd, &stock);
-	if (ret < 0)
+	buf = ft_memalloc(BUFF_SIZE + 1);
+	templine = ft_memalloc(BUFF_SIZE + 1);
+	if (!templine || !buf)
 		return (-1);
-	if (ret == 0 && ft_strlen(stock) == 0)
+	if (create_line(&templine, rmning, rmning) == 1)
+		return (ending_file(line, &templine, &buf));
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		(void)ostock;
-		ft_strdel(&stock);
-		*line = ft_strnew(2);
-		return (0);
+		buf[ret] = '\0';
+		if (create_line(&templine, buf, rmning) == 1)
+			return (ending_file(line, &templine, &buf));
 	}
-	*line = makeline(stock);
-	ll = ft_strlen(*line);
-	stock = ft_strsub(stock, (ll + 1), (ft_strlen(stock) - ll - 1));
-	return (1);
+	if (ret == -1)
+		return (-1);
+	if (ret == 0 && templine[0] != '\0')
+		return (ending_file(line, &templine, &buf));
+	free_mem(&buf, &templine);
+	return (0);
 }

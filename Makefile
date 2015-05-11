@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/10 15:43:41 by ghilbert         ###   ########.fr        #
+#    Updated: 2015/05/11 21:11:09 by tlepeche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,17 @@ INCLUDES	= -I $(INC_PATH) -I libft/includes -I libnetwork/includes
 
 SRC_S_NAME	=	server.c \
 				dial_client.c \
-				password.c
+				password.c \
+				init.c \
+				server_ask_cd.c \
+				server_ask_ls.c \
+				server_ask_pwd.c \
+				server_ask_get.c \
+				ft_how_many.c \
+				ft_strnchr.c \
 
-SRC_C_NAME	=	client.c
+SRC_C_NAME	=	client.c \
+				ft_how_many.c \
 				
 HEADER 		=	$(INC_PATH)ft_p.h \
 				$(INC_PATH)server.h \
