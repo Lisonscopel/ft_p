@@ -17,13 +17,6 @@
 # include <dirent.h>
 //# include <fcntl.h>
 
-typedef	struct		s_fct
-{
-	char			*name;
-	int				(*ptr_funct)(char **, int);
-	struct s_fct	*next;
-}					t_fct;
-
 int					login(void);
 void				dial_client(int cs);
 void				init(t_fct **list);

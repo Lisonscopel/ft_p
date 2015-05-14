@@ -33,10 +33,15 @@ SRC_S_NAME	=	server.c \
 				server_ask_pwd.c \
 				server_ask_get.c \
 				ft_how_many.c \
-				ft_strnchr.c \
+				ft_strnchr.c
 
 SRC_C_NAME	=	client.c \
 				ft_how_many.c \
+				init.c \
+				dial_server.c \
+				ask_get.c \
+				ask_quit.c \
+
 				
 HEADER 		=	$(INC_PATH)ft_p.h \
 				$(INC_PATH)server.h \
