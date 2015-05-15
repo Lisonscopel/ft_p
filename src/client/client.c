@@ -15,7 +15,7 @@ int			main(int ac, char **av)
 	{
 		ft_putstr("client> ");
 		if ((ret = get_next_line(0, &line)) <= 0)
-			ft_putcolorendl("ERROR", 91);
+			ft_putcolorendl("ERROR", 94);
 		else if (line[0] != '\0')
 			dial_server(sock, line);
 		free(line);

@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/11 21:11:09 by tlepeche         ###   ########.fr        #
+#    Updated: 2015/05/15 15:04:35 by ghilbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,5 +124,3 @@ debug:
 
 debugall:
 	CFLAGS="-g" make re
-
-

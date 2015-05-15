@@ -3,30 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   server_ask_get.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 17:38:07 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/11 21:08:43 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/15 18:31:59 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
-
+#include <stdio.h>
+#include <sys/stat.h>
 int ask_get(char **av, int fd)
 {
-	char	*line;
+	char	buff[255];
+	char	tmp;
 	int		tar_fd;
+	int		ret;
+
+	struct stat st;
 
 	if (av[1])
 	{
 		tar_fd = open(av[1], O_RDONLY);
 		if (tar_fd != -1)
 		{
-			while (get_next_line(tar_fd, &line) > 0)
+			fstat(tar_fd, &st);
+			printf("%lld\n", st.st_size);
+			while ((ret = read(tar_fd, buff, 255)) > 0)
 			{
-				line = ft_strjoin(line, "\n");
-				send(fd, line, ft_strlen(line) + 1, 0);
-				recv(fd, line, 1, 0);
+				send(fd, buff, ret, 0);
+				recv(fd, &tmp, 1, 0);
 			}
 			send(fd, "\0", 1, 0);
 			close(tar_fd);

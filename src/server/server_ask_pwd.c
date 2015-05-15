@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_ask_pwd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 15:06:33 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/11 17:54:30 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/15 18:38:57 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ask_pwd(char **av, int fd)
 	(void)av;
 	pwd = (char *)malloc(sizeof(char) * 1024);
 	pwd = getcwd(pwd, 1024);
+	ft_putendl(pwd);
 	send(fd, pwd, ft_strlen(pwd), 0);
 	return (1);
 }
