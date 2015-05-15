@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 22:56:02 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/11 17:57:46 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/15 18:54:41 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@ int					ask_cd(char **av, int fd);
 int					ask_list(char **av, int fd);
 int					ask_pwd(char **av, int fd);
 int					ask_get(char **av, int fd);
+char				*get_root(void);
+
 #endif
