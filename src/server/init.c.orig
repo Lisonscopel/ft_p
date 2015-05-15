@@ -1,6 +1,10 @@
 #include "server.h"
 
+<<<<<<< HEAD
+static void	list_add(t_fct **list, char *name, int (*ptr_fnc)())
+=======
 static t_fct	*list_add(t_fct **list, char *name, int (*ptr_funct)())
+>>>>>>> goodjob
 {
 	t_fct	*new;
 	t_fct	*tmp;
@@ -14,8 +18,18 @@ static t_fct	*list_add(t_fct **list, char *name, int (*ptr_funct)())
 		return (new);
 	else
 	{
+<<<<<<< HEAD
+		new->name = name;
+		new->ptr_funct = ptr_fnc;
+		if (*list == NULL)
+			new->next = NULL;
+		else
+			new->next = *list;
+		*list = new;
+=======
 		while ((*list)->next != NULL)
 			*list = (*list)->next;
+>>>>>>> goodjob
 	}
 	(*list)->next = new;
 	return (tmp);
@@ -24,6 +38,13 @@ static t_fct	*list_add(t_fct **list, char *name, int (*ptr_funct)())
 void			init(t_fct **list)
 {
 	*list = NULL;
+<<<<<<< HEAD
+	list_add(list, "ls", &(ask_list));
+	list_add(list, "bonjour", &(ask_bonjour));
+	list_add(list, "pwd", &(ask_pwd));
+	list_add(list, "quit", &(ask_quit));
+}
+=======
 	*list = list_add(list, "ls", &(ask_list));
 	*list = list_add(list, "cd", &(ask_cd));
 	*list = list_add(list, "pwd", &(ask_pwd));
@@ -31,3 +52,4 @@ void			init(t_fct **list)
 	//	list_add(list, "bonjour", &(ask_bonjour));
 	//	list_add(list, "quit", &(ask_quit));
 }
+>>>>>>> goodjob

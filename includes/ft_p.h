@@ -24,4 +24,11 @@
 # include "get_next_line.h"
 # include "libnetwork.h"
 
+typedef	struct		s_fct
+{
+	char			*name;
+	int				(*ptr_funct)(char **, int);
+	struct s_fct	*next;
+}					t_fct;
+
 #endif

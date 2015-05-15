@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 22:56:02 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 02:01:37 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/11 17:57:46 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 # define SERVER_H
 # include "ft_p.h"
 
-typedef	struct		s_fct
-{
-	char			*name;
-	int				(*ptr_funct)(char **, int);
-	struct s_fct	*next;
-}					t_fct;
+# include <dirent.h>
+//# include <fcntl.h>
 
 int					login(void);
-void				dial_client(int cs, t_fct *list);
+void				dial_client(int cs);
 void				init(t_fct **list);
 
-int	ask_list(char **new_av, int cs);
-int	ask_bonjour(char **new_av, int cs);
-int	ask_pwd(char **new_av, int cs);
-int	ask_quit(char **new_av, int cs);
+int					how_many(char *str, char c);
+char				*ft_strnchr(const char *s, int c, int i);
 
+int					ask_cd(char **av, int fd);
+int					ask_list(char **av, int fd);
+int					ask_pwd(char **av, int fd);
+int					ask_get(char **av, int fd);
 #endif

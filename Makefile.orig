@@ -28,6 +28,9 @@ SRC_S_NAME	=	server.c \
 				dial_client.c \
 				password.c \
 				init.c \
+<<<<<<< HEAD
+				ask.c
+=======
 				server_ask_cd.c \
 				server_ask_ls.c \
 				server_ask_pwd.c \
@@ -41,6 +44,7 @@ SRC_C_NAME	=	client.c \
 				dial_server.c \
 				ask_get.c \
 				ask_quit.c \
+>>>>>>> goodjob
 
 				
 HEADER 		=	$(INC_PATH)ft_p.h \

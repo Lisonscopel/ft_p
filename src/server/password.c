@@ -6,7 +6,7 @@
 /*   By: vpailhe <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 22:40:04 by vpailhe           #+#    #+#             */
-/*   Updated: 2015/05/10 02:04:14 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/11 16:56:29 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			equal_find(char *s)
 	size_t		i;
 
 	i = 0;
-	while(s[i] != '=' && s[i])
+	while (s[i] != '=' && s[i])
 		i++;
 	if (i == ft_strlen(s))
 		return (-1);
@@ -41,7 +41,7 @@ char		*parse_me(char *s)
 	int		i;
 
 	i = 0;
-	while(s[i] != '=' && s[i])
+	while (s[i] != '=' && s[i])
 		i++;
 	s += i + 1;
 	return (s);
@@ -71,7 +71,7 @@ int			login(void)
 	ans = ask("Login :");
 	if (!(fd = open("log", O_RDONLY)))
 		return (-1);
-	while((rd = get_next_line(fd, &line)) > 0)
+	while ((rd = get_next_line(fd, &line)) > 0)
 	{
 		eq = equal_find(line);
 		if (!(strncmp(ans, line, eq)))

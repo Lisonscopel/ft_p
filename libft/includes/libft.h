@@ -6,13 +6,13 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 01:33:10 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 15:40:38 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/11 19:42:59 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBFT_H
 # define FT_LIBFT_H
-# define BUFF_SIZE 1
+# define BUFF_SIZE 1024
 
 # include <string.h>
 # include <stdlib.h>

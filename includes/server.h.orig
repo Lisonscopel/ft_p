@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 22:56:02 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/11 21:10:49 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/15 20:05:22 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#ifndef SERVER_H
+# define SERVER_H
 # include "ft_p.h"
+# include <dirent.h>
+# include <sys/stat.h>
 
-int		how_many(char *str, char c);
-void	dial_server(int sock, char *line);
-void	init(t_fct **list);
-int		ask_get(char **new_av, int sock);
-int		ask_quit(char **new_av, int sock);
+int					login(void);
+void				dial_client(int cs);
+void				init(t_fct **list);
 
+int					how_many(char *str, char c);
+char				*ft_strnchr(const char *s, int c, int i);
+
+int					ask_cd(char **av, int fd);
+int					ask_list(char **av, int fd);
+int					ask_pwd(char **av, int fd);
+int					ask_get(char **av, int fd);
+char				*get_root(void);
 #endif

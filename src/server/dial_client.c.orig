@@ -1,32 +1,51 @@
 #include "server.h"
 
-void	dial_client(int cs)
+void	dial_client(int cs, t_fct *list)
 {
 	int					ret;
-	int					bool;
+	int					ask_ret;
 	char				**new_av;
 	char				buf[1024];
+<<<<<<< HEAD
+	t_fct				*tmp;
+
+
+=======
 	t_fct				*list;
 	t_fct				*tmp;
 	int					ret_val;
 
 	init(&list);
+>>>>>>> goodjob
 	while ((ret = recv(cs, buf, 1023, 0)) > 0)
 	{
 		tmp = list;
 		buf[ret] = '\0';
 		new_av = ft_strsplit_blank(buf);
+<<<<<<< HEAD
+		tmp = list;
+		ask_ret = 0;
+=======
 		bool = 0;
+>>>>>>> goodjob
 		while (tmp != NULL)
 		{
 			if (new_av[0] && ft_strcmp(tmp->name, new_av[0]) == 0)
 			{
+<<<<<<< HEAD
+
+				ask_ret = tmp->ptr_funct(new_av, cs);
+=======
 				ret_val = tmp->ptr_funct(new_av, cs);
 				bool = 1;
+>>>>>>> goodjob
 				break ;
 			}
 			tmp = tmp->next;
 		}
+<<<<<<< HEAD
+	if (ask_ret <= 0)
+=======
 /*		ft_putstr("bool/retour: ");
 		ft_putnbr(bool);
 		ft_putchar(' ');
@@ -35,6 +54,7 @@ void	dial_client(int cs)
 */		// 	else if (ft_strcmp(new_av[0], "bonjour") == 0)
 		// 		send(cs, "Salut", ft_strlen("salut"), 0);
 		if (bool == 0 || ret_val == 0)
+>>>>>>> goodjob
 			send(cs, "", 1, 0);
 	 	ft_putstr("received ");
 	 	ft_putnbr(ret);

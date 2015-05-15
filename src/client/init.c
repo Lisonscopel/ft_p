@@ -1,4 +1,4 @@
-#include "server.h"
+#include "client.h"
 
 static t_fct	*list_add(t_fct **list, char *name, int (*ptr_funct)())
 {
@@ -24,10 +24,6 @@ static t_fct	*list_add(t_fct **list, char *name, int (*ptr_funct)())
 void			init(t_fct **list)
 {
 	*list = NULL;
-	*list = list_add(list, "ls", &(ask_list));
-	*list = list_add(list, "cd", &(ask_cd));
-	*list = list_add(list, "pwd", &(ask_pwd));
+	*list = list_add(list, "quit", &(ask_quit));
 	*list = list_add(list, "get", &(ask_get));
-	//	list_add(list, "bonjour", &(ask_bonjour));
-	//	list_add(list, "quit", &(ask_quit));
 }
