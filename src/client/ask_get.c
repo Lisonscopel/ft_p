@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ask_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lscopel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 18:59:38 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/14 22:53:02 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/15 18:22:53 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int		create_file(char *path)
 {
 	char	*tmp;
+	char	*line;
 	int		fd;
 
 	if(ft_strchr(path, '/'))
@@ -25,13 +26,32 @@ static int		create_file(char *path)
 	else
 		tmp = path;
 	if ((fd = open(tmp, O_RDONLY)) != -1)
-		ft_putendl("Fichier existant");
+	{
+		ft_putendl("\e[0;1mExisting file :\e[0m\n(A)bort, (R)ename, (O)verwrite ?");
+		get_next_line(0, &line);
+		if (line[0] == 'R')
+		{
+			ft_putendl("New name : ");
+			get_next_line(0, &line);
+			return (create_file(line));
+		}
+		else if (line[0] == 'O')
+		{
+			fd = open(tmp, O_TRUNC | O_WRONLY);
+			return (fd);
+		}
+		else
+		{
+			close(fd);
+			return (-1);
+		}
+	}
 	else
 	{
 		fd = open(tmp, O_CREAT | O_WRONLY);
 		return (fd);
 	}
-	return (0);
+	return (-1);
 }
 
 int				ask_get(char **new_av, int sock)
@@ -40,7 +60,7 @@ int				ask_get(char **new_av, int sock)
 	int			fd;
 	char		buf[1024];
 	char		*path;
-
+	
 	ret = recv(sock, buf, 1023, 0);
 	if (buf[0] != '\0')
 	{
@@ -49,16 +69,23 @@ int				ask_get(char **new_av, int sock)
 		fd = create_file(path);
 		if (fd <= 0)
 		{
-			send(sock, "\0", 1, 0);
+			send(sock, "", 1, 0);
+			while((ret = recv(sock, buf, 1023, 0)) > 0)
+			{
+				if(buf[0] == '\0')
+					break ;
+				send(sock, "", 1, 0);
+			}
 			return (-1);
 		}
+		write(fd, buf, ft_strlen(buf));
 		send(sock, "", 1, 0);
 	}
 	while((ret = recv(sock, buf, 1023, 0)) > 0)
 	{
 		if(buf[0] == '\0')
 			break ;
-		ft_putcolor(buf, 31);
+		write(fd, buf, ft_strlen(buf));
 		send(sock, "", 1, 0);
 	}
 	close(fd);

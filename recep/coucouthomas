@@ -50,4 +50,12 @@ Error (line 31): C++ comment
 Error (line 32): C++ comment
 
 Norme: src/server/password.c
-Error (line 90): comment not well formatted
+Error (line 90): comment not well formattedegin only by tabulations
+Error (line 42): bad indentation
+
+Norme: src/server/init.c
+Error: 42 header not at top of the file
+Error (line 31): C++ comment
+Error (line 32): C++ comment
+
+Norme: src/server/pass

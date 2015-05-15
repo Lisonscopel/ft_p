@@ -1,21 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/09 22:56:02 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/11 17:57:46 by tlepeche         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef SERVER_H
 # define SERVER_H
 # include "ft_p.h"
 
 # include <dirent.h>
-//# include <fcntl.h>
+# include <sys/stat.h>
 
 int					login(void);
 void				dial_client(int cs);
@@ -28,4 +16,6 @@ int					ask_cd(char **av, int fd);
 int					ask_list(char **av, int fd);
 int					ask_pwd(char **av, int fd);
 int					ask_get(char **av, int fd);
+char				*get_root(void);
+
 #endif

@@ -28,10 +28,12 @@ void	dial_server(int sock, char *line)
 	if (bool == 0)
 	{
 		ret = recv(sock, buf, 1023, 0);
-		ft_putendl(buf);
 		buf[ret] = '\0';
 		if (ft_strlen(buf) != 0)
+		{
+			ft_putendl(buf);
 			ft_putendl("SUCCESS");
+		}
 		else
 			ft_putcolorendl("ERROR", 31);
 	}
