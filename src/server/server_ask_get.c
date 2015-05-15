@@ -6,20 +6,18 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 17:38:07 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/15 18:31:59 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/15 19:45:52 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
-#include <stdio.h>
-#include <sys/stat.h>
+
 int ask_get(char **av, int fd)
 {
-	char	buff[255];
-	char	tmp;
-	int		tar_fd;
-	int		ret;
-
+	char		buff[255];
+	char		tmp;
+	int			tar_fd;
+	int			ret;
 	struct stat st;
 
 	if (av[1])
@@ -28,7 +26,6 @@ int ask_get(char **av, int fd)
 		if (tar_fd != -1)
 		{
 			fstat(tar_fd, &st);
-			printf("%lld\n", st.st_size);
 			while ((ret = read(tar_fd, buff, 255)) > 0)
 			{
 				send(fd, buff, ret, 0);

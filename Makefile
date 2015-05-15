@@ -6,11 +6,12 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/15 15:04:35 by ghilbert         ###   ########.fr        #
+#    Updated: 2015/05/15 19:43:42 by ghilbert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_S		= server
+NAME_SERV	= serveur
 NAME_C		= client
 
 BIN_PATH	= bin/
@@ -67,7 +68,7 @@ SRC_C		= $(addprefix $(SRC_C_PATH),$(SRC_C_NAME))
 OBJS_S 		= $(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_S)))
 OBJS_C 		= $(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_C)))
 
-BIN_S		= $(addprefix $(BIN_PATH),$(NAME_S))
+BIN_S		= $(addprefix $(BIN_PATH),$(NAME_SERV))
 BIN_C		= $(addprefix $(BIN_PATH),$(NAME_C))
 
 

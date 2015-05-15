@@ -1,6 +1,53 @@
-admin=admin
-remylatouillette=sauciflon
-pyrate=pinguouindansleschampshivermechant
-thomas=petitpecheur
-vincent=vince42schoolol
-lison=kikool
+Norme: libft/includes/libft.h
+Error (line 132): must begin only by tabulations
+Error (line 132): comment not well formatted
+Error (line 133): spaces at the end of line
+
+Norme: libnetwork/includes/client_create_tcp.c
+Error: file must end with a single empty line
+Error: 42 header not at top of the file
+Error (line 22, col 0): no newline after block
+
+Norme: libnetwork/includes/libnetwork.h
+Error (line 13): wrong number of spaces in preprocessor line
+Error (line 29): must begin only by tabulations
+Error (line 29): spaces at the end of line
+Error (line 39): multiple empty lines
+
+Warning: src/client/ask_get.c may not compile or is invalid for some reasons.
+
+Norme: src/client/ask_quit.c
+Error: file must end with a single empty line
+Error: 42 header not at top of the file
+Error (line 10, col 0): no newline after block
+
+
+Norme: src/client/dial_server.c
+Error: 42 header not at top of the file
+Error (line 3): function dial_server has 35 lines
+Error (line 3, col 0): dial_server has 7 variables
+
+Norme: src/server/dial_client.c
+Error: 42 header not at top of the file
+Error (line 3): function dial_client has 40 lines
+Error (line 3, col 0): dial_client has 7 variables
+Error (line 30): comment not well formatted
+Error (line 30): comment not well placed
+Error (line 35): C++ comment
+Error (line 36): C++ comment
+Error (line 39): must begin only by tabulations
+Error (line 39): bad indentation
+Error (line 40): must begin only by tabulations
+Error (line 40): bad indentation
+Error (line 41): must begin only by tabulations
+Error (line 41): bad indentation
+Error (line 42): must begin only by tabulations
+Error (line 42): bad indentation
+
+Norme: src/server/init.c
+Error: 42 header not at top of the file
+Error (line 31): C++ comment
+Error (line 32): C++ comment
+
+Norme: src/server/password.c
+Error (line 90): comment not well formatted
