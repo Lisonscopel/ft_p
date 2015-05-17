@@ -1,6 +1,6 @@
 #include "server.h"
 
-int	ask_pwd(char **av, int fd)
+char		*pwd_handler(void)
 {
 	char	*pwd;
 	char	*root;
@@ -8,7 +8,6 @@ int	ask_pwd(char **av, int fd)
 	int		len;
 	char	*dir;
 
-	(void)av;
 	pwd = (char *)malloc(sizeof(char) * 1024);
 	pwd = getcwd(pwd, 1024);
 	root = get_root();
@@ -17,11 +16,17 @@ int	ask_pwd(char **av, int fd)
 	len = len - len_root;
 	dir = ft_strsub(pwd, len_root, len);
 	if (!dir)
-		send(fd, "/", 1, 0);
+		return ("/");
 	else
-	{
-		dir = ft_strjoin("/", dir);
-		send(fd, dir, ft_strlen(dir), 0);
-	}
+		return (ft_strjoin("/", dir));
+}
+
+int			ask_pwd(char **av, int fd)
+{
+	char	*pwd;
+
+	(void)av;
+	pwd = pwd_handler();
+	send(fd, pwd, ft_strlen(pwd), 0);
 	return (1);
 }

@@ -1,6 +1,19 @@
 #include "server.h"
 
-void	dial_client(int cs)
+int		display_prompt(char **new_av, int sock)
+{
+	char	*pwd;
+
+	(void)new_av;
+	pwd = ft_strjoin(pwd_handler(), " > ");
+	send(sock, pwd, ft_strlen(pwd), 0);
+	ft_putstr("YOW >");
+	ft_putstr(pwd);
+	ft_putstr("< YOW\n");
+	return (1);
+}
+
+void			dial_client(int cs)
 {
 	int					ret;
 	int					bool;
@@ -11,6 +24,7 @@ void	dial_client(int cs)
 	int					ret_val;
 
 	init(&list);
+
 	while ((ret = recv(cs, buf, 1023, 0)) > 0)
 	{
 		tmp = list;

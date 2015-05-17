@@ -15,7 +15,9 @@ char				*ft_strnchr(const char *s, int c, int i);
 int					ask_cd(char **av, int fd);
 int					ask_list(char **av, int fd);
 int					ask_pwd(char **av, int fd);
+char				*pwd_handler(void);
 int					ask_get(char **av, int fd);
 char				*get_root(void);
+int		display_prompt(char **new_av, int sock);
 
 #endif
