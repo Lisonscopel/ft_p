@@ -6,13 +6,13 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/15 16:52:44 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/17 01:56:37 by vpailhe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-int		main(int ac, char **av)
+int						main(int ac, char **av)
 {
 	int					port;
 	int					sock;
@@ -27,7 +27,7 @@ int		main(int ac, char **av)
 	while (42)
 	{
 		cs = accept(sock, (struct sockaddr *)&csin, &cslen);
-		if (fork() == 0)
+		if (fork()  == 0)
 		{
 			dial_client(cs);
 			close(cs);

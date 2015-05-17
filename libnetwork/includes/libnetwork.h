@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/10 14:15:19 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/10 15:22:48 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/16 20:32:07 by vpailhe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <netdb.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+# include <sys/stat.h>
 
 # include "libft.h"
 
@@ -35,6 +36,9 @@ int		client_create_tcp(char *addr, int port);
 /*
 **both
 */
+int		send_file(char **path, int socket);
+int		recieve_file(char **path, int socket);
+int		create_file(char *path);
 
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 18:59:38 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/15 18:22:53 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/16 20:40:50 by vpailhe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-static int		create_file(char *path)
+static int		something(char *path)
 {
 	char	*tmp;
 	char	*line;
@@ -33,7 +33,7 @@ static int		create_file(char *path)
 		{
 			ft_putendl("New name : ");
 			get_next_line(0, &line);
-			return (create_file(line));
+			return (something(line));
 		}
 		else if (line[0] == 'O')
 		{
@@ -60,13 +60,13 @@ int				ask_get(char **new_av, int sock)
 	int			fd;
 	char		buf[1024];
 	char		*path;
-	
+
 	ret = recv(sock, buf, 1023, 0);
 	if (buf[0] != '\0')
 	{
 		buf[ret] = '\0';
 		path = new_av[1];
-		fd = create_file(path);
+		fd = something(path);
 		if (fd <= 0)
 		{
 			send(sock, "", 1, 0);
@@ -85,7 +85,7 @@ int				ask_get(char **new_av, int sock)
 	{
 		if(buf[0] == '\0')
 			break ;
-		write(fd, buf, ft_strlen(buf));
+		write(fd, buf, ret);
 		send(sock, "", 1, 0);
 	}
 	close(fd);
