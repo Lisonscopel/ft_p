@@ -1,5 +1,14 @@
 #include "server.h"
 
+void	byte_reception(char **new_av, char *buf, int ret)
+{
+	ft_putstr("received ");
+	ft_putnbr(ret);
+	ft_putstr(" bytes: ");
+	ft_putendl(buf);
+	ft_free_tab(new_av);
+}
+
 int		display_prompt(char **new_av, int sock)
 {
 	char	*pwd;
@@ -10,18 +19,17 @@ int		display_prompt(char **new_av, int sock)
 	return (1);
 }
 
-void			dial_client(int cs)
+void	dial_client(int cs)
 {
-	int					ret;
-	int					bool;
-	char				**new_av;
-	char				buf[1024];
-	t_fct				*list;
-	t_fct				*tmp;
-	int					ret_val;
+	int		ret;
+	int		bool;
+	char	**new_av;
+	char	buf[1024];
+	t_fct	*list;
+	t_fct	*tmp;
+	int		ret_val;
 
 	init(&list);
-
 	while ((ret = recv(cs, buf, 1023, 0)) > 0)
 	{
 		tmp = list;
@@ -40,10 +48,6 @@ void			dial_client(int cs)
 		}
 		if (bool == 0)
 			send(cs, "ERROR Command not found", 32, 0);
-	 	ft_putstr("received ");
-	 	ft_putnbr(ret);
-	 	ft_putstr(" bytes: ");
-	 	ft_putendl(buf);
-		ft_free_tab(new_av);
+		byte_reception(new_av, buf, ret);
 	}
 }
