@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/10 19:55:57 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/17 14:54:42 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/17 18:22:54 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,17 @@ int		move_dir(char *tar_dir, char *cur_dir, char *root, int fd)
 	if (dir_cmp(tar_dir, root) == 0)
 	{
 		chdir(cur_dir);
+		send(fd, "ERROR cd: Can't go further than server root directory", 54, 0);
 		return (-1);
 	}
 	else
 	{
 		if (len_root == (int)ft_strlen(tar_dir))
-			send(fd, "/", 1, 0);
+			send(fd, "/\n", 2, 0);
 		else
 		{
 			pwd = ft_strsub(tar_dir, len_root, ft_strlen(tar_dir) - len_root);
+			pwd = ft_strcat(pwd , "\n");
 			send(fd, pwd, ft_strlen(pwd), 0);
 		}
 		return (1);
@@ -109,5 +111,8 @@ int		ask_cd(char **av, int fd)
 	if (check_access(tar_dir) == 1)
 		return (move_dir(tar_dir, cur_dir, root, fd));
 	else
+	{
+		send(fd, "ERROR cd: No such file or directory", 36, 0);
 		return (-1);
+	}
 }
