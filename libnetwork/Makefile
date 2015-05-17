@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/10 15:14:03 by ghilbert          #+#    #+#              #
-#    Updated: 2015/05/16 19:24:22 by vpailhe          ###   ########.fr        #
+#    Updated: 2015/05/17 15:09:48 by tlepeche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = libnetwork.a
 SRCS = serv_create_tcp.c \
 		client_create_tcp.c \
 		trans_file.c \
+		last_error.c \
 
 OBJS = $(SRCS:.c=.o)
 

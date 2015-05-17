@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/10 14:15:19 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/17 14:49:56 by ghilbert         ###   ########.fr       */
+/*   Updated: 2015/05/17 15:10:14 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		client_create_tcp(char *addr, int port);
 int		send_file(char **path, int socket);
 int		receive_file(char **path, int socket);
 int		create_file(char *path);
+char	*last_error(char *error);
 
 
 #endif
