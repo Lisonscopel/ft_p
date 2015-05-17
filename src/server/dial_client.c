@@ -7,9 +7,6 @@ int		display_prompt(char **new_av, int sock)
 	(void)new_av;
 	pwd = ft_strjoin(pwd_handler(), " > ");
 	send(sock, pwd, ft_strlen(pwd), 0);
-	ft_putstr("YOW >");
-	ft_putstr(pwd);
-	ft_putstr("< YOW\n");
 	return (1);
 }
 
@@ -41,15 +38,8 @@ void			dial_client(int cs)
 			}
 			tmp = tmp->next;
 		}
-/*		ft_putstr("bool/retour: ");
-		ft_putnbr(bool);
-		ft_putchar(' ');
-		ft_putnbr(ret_val);
-		ft_putchar('\n');
-*/		// 	else if (ft_strcmp(new_av[0], "bonjour") == 0)
-		// 		send(cs, "Salut", ft_strlen("salut"), 0);
 		if (bool == 0)
-			send(cs, "", 1, 0);
+			send(cs, "ERROR Command not found", 32, 0);
 	 	ft_putstr("received ");
 	 	ft_putnbr(ret);
 	 	ft_putstr(" bytes: ");

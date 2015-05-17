@@ -16,6 +16,7 @@ char		*pwd_handler(void)
 	len = len - len_root;
 	dir = ft_strsub(pwd, len_root, len);
 	if (!dir)
+<<<<<<< HEAD
 		return ("/");
 	else
 		return (ft_strjoin("/", dir));
@@ -27,7 +28,17 @@ int			ask_pwd(char **av, int fd)
 
 	(void)av;
 	pwd = pwd_handler();
-	pwd = ft_strjoin(pwd, "\n");
 	send(fd, pwd, ft_strlen(pwd), 0);
+=======
+		send(fd, "/\n", 2, 0);
+	else
+	{
+		dir = ft_strjoin("/", dir);
+		free(dir);
+		dir = ft_strjoin(dir, "\n");
+		send(fd, dir, ft_strlen(dir), 0);
+		free(dir);
+	}
+>>>>>>> origin/ls_cd
 	return (1);
 }

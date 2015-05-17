@@ -28,14 +28,20 @@ void	dial_server(int sock, char *line)
 	}
 	if (bool == 0)
 	{
-		ret = recv(sock, buf, 1023, 0);
-		buf[ret] = '\0';
-		if (ft_strlen(buf) != 0)
+		ft_bzero(buf ,1023);
+		ret = recv(sock, buf, 1023 , 0);
 		{
-			ft_putendl(buf);
-			ft_putendl("SUCCESS");
+			buf[ret] = '\0';
+			if (ft_strncmp("ERROR ", buf, 6) != 0)
+			{
+				ft_putcolorendl("SUCCESS", 32);
+				ft_putstr(buf);
+			}
+			else
+			{
+				ft_putcolorendl("ERROR", 31);
+				ft_putendl(buf + 6);
+			}
 		}
-		else
-			ft_putcolorendl("ERROR", 31);
 	}
 }

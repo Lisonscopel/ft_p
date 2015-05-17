@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_ask_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/10 19:55:57 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/11 17:40:29 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/17 19:16:12 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int		check_access(char *path)
 
 int		move_dir(char *tar_dir, char *cur_dir, char *root, int fd)
 {
-	char	*pwd;
 	int		len_root;
 
 	len_root = ft_strlen(root);
@@ -73,19 +72,12 @@ int		move_dir(char *tar_dir, char *cur_dir, char *root, int fd)
 	if (dir_cmp(tar_dir, root) == 0)
 	{
 		chdir(cur_dir);
-		return (0);
+		send(fd, "ERROR cd: Can't go further than server root directory", 54, 0);
+		return (-1);
 	}
 	else
-	{
-		if (len_root == (int)ft_strlen(tar_dir))
-			send(fd, "/", 1, 0);
-		else
-		{
-			pwd = ft_strsub(tar_dir, len_root, ft_strlen(tar_dir) - len_root);
-			send(fd, pwd, ft_strlen(pwd), 0);
-		}
-		return (1);
-	}
+		send(fd, "", 1, 0);
+	return (1);
 }
 
 int		ask_cd(char **av, int fd)
@@ -109,5 +101,8 @@ int		ask_cd(char **av, int fd)
 	if (check_access(tar_dir) == 1)
 		return (move_dir(tar_dir, cur_dir, root, fd));
 	else
-		return (0);
+	{
+		send(fd, "ERROR cd: No such file or directory", 36, 0);
+		return (-1);
+	}
 }
