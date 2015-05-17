@@ -6,7 +6,7 @@
 /*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/11 14:16:33 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/17 18:38:10 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/18 00:19:12 by tlepeche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_av(char *str)
 	i = 1;
 	while	(str[i])
 	{
-		if (str[i] == 'A' || str[i] == 'l')
+		if (str[i] == 'A' || str[i] == 'l' || str[i] == 'R')
 			i++;
 		else
 			return (0);
