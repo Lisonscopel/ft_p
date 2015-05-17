@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trans_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpailhe <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/16 19:08:02 by vpailhe           #+#    #+#             */
-/*   Updated: 2015/05/17 02:04:35 by vpailhe          ###   ########.fr       */
+/*   Updated: 2015/05/17 14:53:17 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char			*get_path(char *s)
 	return (ret);
 }
 
-static int			chose_stuff(char *path, int fd)
+static int			choose_stuff(char *path, int fd)
 {
 	char			*line;
 
@@ -75,7 +75,7 @@ static int			chose_stuff(char *path, int fd)
 	}
 	else
 		close(fd);
-	return (-1);
+	return (0);
 }
 
 int					create_file(char *path)
@@ -85,13 +85,13 @@ int					create_file(char *path)
 
 	good_path = get_path(path);
 	if ((fd = open(good_path, O_RDONLY)) != -1)
-		return (chose_stuff(good_path, fd));
+		return (choose_stuff(good_path, fd));
 	else
 	{
 		fd = open(good_path, O_CREAT | O_WRONLY);
 		return (fd);
 	}
-	return (-1);
+	return (0);
 }
 
 static int			read_file(int socket, int fd)
@@ -109,10 +109,10 @@ static int			read_file(int socket, int fd)
 			write(fd, buff, ret);
 		send(socket, "", 1, 0);
 	}
-	return (-1);
+	return (0);
 }
 
-int					recieve_file(char **path, int socket)
+int					receive_file(char **path, int socket)
 {
 	int				ret;
 	int				fd;

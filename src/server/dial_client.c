@@ -34,7 +34,7 @@ void	dial_client(int cs)
 		ft_putchar('\n');
 */		// 	else if (ft_strcmp(new_av[0], "bonjour") == 0)
 		// 		send(cs, "Salut", ft_strlen("salut"), 0);
-		if (bool == 0)
+		if (bool == 0 || ret_val == -1)
 			send(cs, "", 1, 0);
 	 	ft_putstr("received ");
 	 	ft_putnbr(ret);
