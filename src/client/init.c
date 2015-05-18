@@ -27,4 +27,5 @@ void			init(t_fct **list)
 	*list = list_add(list, "quit", &(ask_quit));
 	*list = list_add(list, "exit", &(ask_quit));
 	*list = list_add(list, "get", &(receive_file));
+	*list = list_add(list, "put", &(ask_put));
 }

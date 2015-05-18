@@ -28,7 +28,7 @@ void	dial_server(int sock, char *line)
 	}
 	if (bool == 0)
 	{
-		ft_bzero(buf ,1023);
+		ft_bzero(buf, 1023);
 		ret = recv(sock, buf, 1023 , 0);
 		{
 			buf[ret] = '\0';

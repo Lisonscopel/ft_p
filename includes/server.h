@@ -20,4 +20,11 @@ int					ask_get(char **av, int fd);
 char				*get_root(void);
 int		display_prompt(char **new_av, int sock);
 
+
+/*
+ * PUT
+ */
+int		put_create_file(char *path, int socket);
+int		ask_put(char** path, int socket);
+
 #endif
