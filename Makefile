@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/17 19:21:32 by lscopel          ###   ########.fr        #
+#    Updated: 2015/05/18 22:02:16 by tlepeche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,16 +32,17 @@ SRC_S_NAME	=	server.c \
 				server_ask_cd.c \
 				server_ask_ls.c \
 				server_ask_pwd.c \
+				server_ask_put.c \
 				ft_how_many.c \
-				ft_strnchr.c
+				ft_strnchr.c \
 
 SRC_C_NAME	=	client.c \
 				ft_how_many.c \
 				init.c \
 				dial_server.c \
 				ask_quit.c \
+				client_ask_put.c \
 
-				
 HEADER 		=	$(INC_PATH)ft_p.h \
 				$(INC_PATH)server.h \
 				$(INC_PATH)client.h

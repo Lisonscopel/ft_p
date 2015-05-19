@@ -7,7 +7,7 @@ static void	prompt(int sock)
 
 	ret = 0;
 	send(sock, "affiche_mon_prompt_steuple_thx_bye", 35, 0);
-	if ((ret = recv(sock, &buff, 1023, 0)) <= 0)
+	if ((ret = recv(sock, buff, 1023, 0)) <= 0)
 	{
 		ft_putstr("Connection Error\n");
 		exit(0);
