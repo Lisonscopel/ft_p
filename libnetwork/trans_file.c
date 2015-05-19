@@ -2,7 +2,7 @@
 
 int					send_file(char **path, int socket)
 {
-	char			buff[255];
+	char			buff[1];
 	char			tmp;
 	int				fd;
 	int				ret;
@@ -17,7 +17,7 @@ int					send_file(char **path, int socket)
 			ft_putendl(size);
 			send(socket, size, ft_strlen(size), 0);
 			recv(socket, &tmp, 1, 0);
-			while ((ret = read(fd, buff, 255)) > 0)
+			while ((ret = read(fd, buff, 1)) > 0)
 			{
 				send(socket, buff, ret, 0);
 				recv(socket, &tmp, 1, 0);
@@ -26,6 +26,7 @@ int					send_file(char **path, int socket)
 			return (1);
 		}
 	}
+	send(socket, "", 1, 0);
 	return (0);
 }
 
@@ -92,7 +93,7 @@ static int			read_file(int socket, int fd, int size)
 
 	if (fd == 0)
 		send(socket, "", 1, 0);
-	while (size > 255)
+	while (size > 1)
 	{
 		ret = recv(socket, buff, 1023, 0);
 		if (fd > 0)
@@ -112,8 +113,12 @@ int					receive_file(char **path, int socket)
 	int				size;
 
 	ft_bzero(buff, 1023);
-	if ((ret = recv(socket, buff, 1023, 0)) == 0)
+	ret = recv(socket, buff, 1023, 0);
+	if (ret == 1 && buff[0] == '\0')
+	{
+		ft_putendl("ERROR");
 		return (0);
+	}
 	size = ft_atoi(buff);
 	send(socket, "", 1, 0);
 	ret = recv(socket, buff, 1023, 0);
