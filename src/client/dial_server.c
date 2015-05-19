@@ -8,7 +8,7 @@ void	dial_server(int sock, char *line)
 	t_fct	*tmp;
 	char	**new_av;
 	int		ret_val;
-	char	buf[1024];
+	char	buf[32768];
 	int		ret;
 
 	bool = 0;
@@ -28,8 +28,7 @@ void	dial_server(int sock, char *line)
 	}
 	if (bool == 0)
 	{
-		ft_bzero(buf ,1023);
-		ret = recv(sock, buf, 1023 , 0);
+		while ((ret = recv(sock, buf, 32767, 0)))
 		{
 			buf[ret] = '\0';
 			if (ft_strncmp("ERROR ", buf, 6) != 0)
@@ -42,6 +41,8 @@ void	dial_server(int sock, char *line)
 				ft_putcolorendl("ERROR", 31);
 				ft_putendl(buf + 6);
 			}
+			if (ret < 32767)
+				break ;
 		}
 	}
 }
