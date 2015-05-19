@@ -39,10 +39,10 @@ int		put_choose_stuff(char *path, int fd, int socket)
 	}
 	else
 	{
-		send(socket, "", 1, 0);
+		send(socket, "Put stopped\n", 12, 0);
 		close(fd);
+		return (-1);
 	}
-	return (0);
 }
 
 int		put_create_file(char *path, int socket)
@@ -84,16 +84,23 @@ int		ask_put(char **path, int socket)
 	int		size;
 	char	*good_path;
 
+	send(socket, "", 1, 0);
 	ret = recv(socket, buff, 1023, 0);
 	buff[ret] = '\0';
-	if (ft_strcmp(buff, "ERROR") == 0)
-		return (0);
+	if (ft_strncmp(buff, "ER1", 3) == 0)
+	{
+		send(socket, "ERROR put: file doesn't exists", 30, 0);
+		return (-1);
+	}
+	else if (ft_strncmp(buff, "ER2", 3) == 0)
+	{
+		send(socket, "ERROR put: too few arguments", 28, 0);
+		return (-1);
+	}
 	size = ft_atoi(buff);
 	good_path = path[1];
 	fd = put_create_file(good_path, socket);
-	if (fd <= 0)
-		send(socket, "S", 1, 0);
-	else
+	if (fd != -1)
 	{
 		send(socket, "K", 1, 0);
 		read_file(socket, fd, size);

@@ -2,11 +2,7 @@
 //	buff[0] == 'Q' -> question -> fichier deja existant
 //	buff[0] == 'R' -> demande pour le rename
 //	buff[0] == 'K' -> fin des question / pas de question et fichier existant -> debut de la copie
-//	buff[0]	== 'S' -> STOP fichier non existant
 
-
-// FONCTION PRESK FONCTIONNELLE, REVOIR QUAND ON ENVOI DE LA MERDE LORS DE LA DEMANDE (a, r, o)
-// + REVOIR LORS DE LA RECREATION DUN MEME FICHIER (PUT MAKEFILE x 2 PAR EX)
 #include "client.h"
 
 int		ask_put(char **path, int socket)
@@ -18,6 +14,7 @@ int		ask_put(char **path, int socket)
 	struct stat	st;
 	char		*size;
 
+	recv(socket, buff, 1, 0);
 	if (path[1])
 	{
 		if ((fd = open(path[1], O_RDONLY)) != -1)
@@ -39,7 +36,7 @@ int		ask_put(char **path, int socket)
 					if (line[0] == ft_tolower('a'))
 					{
 						close(fd);
-						return (1);
+						return (-1);
 					}
 					else if (line[0] == ft_tolower('r'))
 					{
@@ -60,12 +57,9 @@ int		ask_put(char **path, int socket)
 				return (1);
 			}
 		}
-		ft_putendl(path[1]);
-		ft_putendl("ERROR put: file doesn't exist");
-		send(socket, "ERROR", 5, 0);
-		return (0);
+		send(socket, "ER1", 3, 0);
+		return (-1);
 	}
-	ft_putendl("ERROR put: too few arguments");
-	send(socket, "ERROR", 5, 0);
-	return (0);
+	send(socket, "ER2", 3, 0);
+	return (-1);
 }

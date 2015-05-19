@@ -35,13 +35,14 @@ void	dial_client(int cs)
 		tmp = list;
 		buf[ret] = '\0';
 		new_av = ft_strsplit_blank(buf);
+		printf("av[0] = %s\n", new_av[0]);
 		bool = 0;
 		while (tmp != NULL)
 		{
 			if (new_av[0] && ft_strcmp(tmp->name, new_av[0]) == 0)
 			{
-				ret_val = tmp->ptr_funct(new_av, cs);
 				bool = 1;
+				ret_val = tmp->ptr_funct(new_av, cs);
 				break ;
 			}
 			tmp = tmp->next;
