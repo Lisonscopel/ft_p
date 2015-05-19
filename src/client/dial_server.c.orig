@@ -16,6 +16,7 @@ void	dial_server(int sock, char *line)
 	tmp = list;
 	new_av = ft_strsplit_blank(line);
 	send(sock, line, ft_strlen(line), 0);
+	ret_val = 0;
 	while (tmp != NULL)
 	{
 		if (new_av[0] && ft_strcmp(tmp->name, new_av[0]) == 0)
@@ -26,11 +27,18 @@ void	dial_server(int sock, char *line)
 		}
 		tmp = tmp->next;
 	}
-	if (bool == 0)
+	printf("ret_val = %d\n", ret_val);
+	if (bool == 0 || ret_val == -1)
 	{
+<<<<<<< HEAD
+		ft_bzero(buf, 1023);
+		ret = recv(sock, buf, 1023 , 0);
+=======
 		while ((ret = recv(sock, buf, 32767, 0)))
+>>>>>>> master
 		{
 			buf[ret] = '\0';
+			printf("buf = %s\n", buf);
 			if (ft_strncmp("ERROR ", buf, 6) != 0)
 			{
 				ft_putcolorendl("SUCCESS", 32);
