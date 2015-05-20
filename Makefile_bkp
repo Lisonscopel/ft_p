@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/20 16:48:09 by sduprey          ###   ########.fr        #
+#    Updated: 2015/05/20 14:39:59 by sduprey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,16 @@ NAME_S		= server
 NAME_SERV	= serveur
 NAME_C		= client
 
+BIN_PATH	= bin/
+
+SRC_PATH	= src/
+SRC_S_PATH	= $(NAME_S)/
+SRC_C_PATH	= $(NAME_C)/
+
+OBJ_PATH	= obj/
+
 INC_PATH	= includes/
-INC = -I $(INC_PATH) -I libft/includes -I libnetwork/includes
+INCLUDES	= -I $(INC_PATH) -I libft/includes -I libnetwork/includes
 
 SRC_S_NAME	=	server.c \
 				dial_client.c \
@@ -35,18 +43,6 @@ SRC_C_NAME	=	client.c \
 				ask_quit.c \
 				client_ask_put.c \
 
-NO_COLOR = "\033[0;0m"
-CC_COLOR = "\033[0;33m"
-EX_COLOR = "\033[0;32m"
-PX_COLOR = "\033[4;37m"
-DE_COLOR = "\033[0;31m"
-
-CC_STR = $(CC_COLOR)[CC]$(NO_COLOR)
-EX_STR_C = $(EX_COLOR)$(NAME_C)$(NO_COLOR)
-EX_STR_S = $(EX_COLOR)$(NAME_S)$(NO_COLOR)
-PX_STR = $(PX_COLOR)Binary compiled successfully$(NO_COLOR)
-DE_STR = $(DE_COLOR)Remove$(NO_COLOR)
-
 HEADER 		=	$(INC_PATH)ft_p.h \
 				$(INC_PATH)server.h \
 				$(INC_PATH)client.h
@@ -59,71 +55,65 @@ LIBNET_PATH	= libnetwork
 LIBNET_NAME	= -lnetwork
 LIBNET		= -L$(LIBNET_PATH) $(LIBNET_NAME)
 
+
 LIBS		= $(LIBFT) $(LIBNET)
 
 CC			= gcc
 CFLAGS		+= -Wall -Werror -Wextra
-RM = rm -rf
 
-OBJ_S = $(SRC_S_NAME:%.c=$(OBJDIR_S)%.o)
-OBJ_C = $(SRC_C_NAME:%.c=$(OBJDIR_C)%.o)
+SRC_S		= $(addprefix $(SRC_S_PATH),$(SRC_S_NAME))
+SRC_C		= $(addprefix $(SRC_C_PATH),$(SRC_C_NAME))
 
-BINDIR = bin/
+OBJS_S 		= $(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_S)))
+OBJS_C 		= $(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_C)))
 
-OBJDIR = obj/
-OBJDIR_C = $(OBJDIR)client/
-OBJDIR_S = $(OBJDIR)server/
-
-SRCDIR = src/
-SRCDIR_C = $(SRCDIR)client/
-SRCDIR_S = $(SRCDIR)server/
+BIN_S		= $(addprefix $(BIN_PATH),$(NAME_SERV))
+BIN_C		= $(addprefix $(BIN_PATH),$(NAME_C))
 
 
 .PHONY: all clean fclean re proper debug debugall
 
-all: lft lnw $(NAME_S) $(NAME_C)
+all: $(NAME_S) $(NAME_C)
 
-$(NAME_S): $(OBJ_S)
-	@mkdir -p $(BINDIR)
-	@$(CC) $(CFLAGS) -o $(BINDIR)$(NAME_S) $(LIBS) $^
-	@echo ""
-	@echo $(PX_STR) : $(EX_STR_S)
-	@echo ""
+$(NAME_S): $(BIN_S)
+$(NAME_C): $(BIN_C)
 
-$(OBJDIR_S)%.o: $(SRCDIR_S)%.c
-	@mkdir -p $(OBJDIR)
-	@mkdir -p $(OBJDIR_S)
-	@$(CC) -c $(CFLAGS) $(INC) $< -o $@
-	@echo $(CC_STR) $*
+$(BIN_S): libft/libft.a libnetwork/libnetwork.a $(OBJS_S) | $(BIN_PATH)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_S) -o $(BIN_S) $(LIBS)
 
-$(NAME_C): $(OBJ_C)
-	@mkdir -p $(BINDIR)
-	@$(CC) $(CFLAGS) -o $(BINDIR)$(NAME_C) $(LIBS) $^
-	@echo ""
-	@echo $(PX_STR) : $(EX_STR_C)
-	@echo ""
+$(BIN_C): libft/libft.a libnetwork/libnetwork.a $(OBJS_C) | $(BIN_PATH)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_C) -o $(BIN_C) $(LIBS)
 
-$(OBJDIR_C)%.o: $(SRCDIR_C)%.c
-	@mkdir -p $(OBJDIR)
-	@mkdir -p $(OBJDIR_C)
-	@$(CC) -c $(CFLAGS) $(INC) $< -o $@
-	@echo $(CC_STR) $*
-
-lft:
+libft/libft.a:
 	@make -C libft
 
-lnw:
+libnetwork/libnetwork.a:
 	@make -C libnetwork
+
+$(OBJS_S): | $(OBJ_PATH)
+$(OBJS_C): | $(OBJ_PATH)
+
+$(OBJ_PATH)%.o : $(SRC_PATH)%.c $(HEADER)
+	$(CC) -c $(CFLAGS) $< -o $@ $(INCLUDES)
+
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)$(NAME_S)
+	@mkdir -p $(OBJ_PATH)$(NAME_C)
+
+$(BIN_PATH):
+	@mkdir -p $(BIN_PATH)
 
 clean:
 	@make clean -C libft
 	@make clean -C libnetwork
-	@$(RM) $(OBJDIR)
+	rm -rf $(OBJS)
+	rm -rf $(OBJ_PATH)
 
 fclean: clean
-	@make fclean -C libft
-	@make fclean -C libnetwork
-	@$(RM) $(BINDIR)
+	rm -rf libft/libft.a
+	rm -rf libnetwork/libnetwork.a
+	rm -rf $(BIN_PATH)
 
 proper: all clean
 
