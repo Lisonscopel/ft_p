@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/20 16:48:09 by sduprey          ###   ########.fr        #
+#    Updated: 2015/05/20 17:42:03 by sduprey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,6 @@ RM = rm -rf
 OBJ_S = $(SRC_S_NAME:%.c=$(OBJDIR_S)%.o)
 OBJ_C = $(SRC_C_NAME:%.c=$(OBJDIR_C)%.o)
 
-BINDIR = bin/
-
 OBJDIR = obj/
 OBJDIR_C = $(OBJDIR)client/
 OBJDIR_S = $(OBJDIR)server/
@@ -78,14 +76,17 @@ SRCDIR = src/
 SRCDIR_C = $(SRCDIR)client/
 SRCDIR_S = $(SRCDIR)server/
 
+BINDIR = bin/
+BIN_S = $(addprefix $(BINDIR),$(NAME_S))
+BIN_C = $(addprefix $(BINDIR),$(NAME_C))
 
 .PHONY: all clean fclean re proper debug debugall
 
-all: lft lnw $(NAME_S) $(NAME_C)
+all: lft lnw $(NAME_C) $(NAME_S)
 
 $(NAME_S): $(OBJ_S)
 	@mkdir -p $(BINDIR)
-	@$(CC) $(CFLAGS) -o $(BINDIR)$(NAME_S) $(LIBS) $^
+	@$(CC) $(CFLAGS) -o $(BIN_S) $(LIBS) $^
 	@echo ""
 	@echo $(PX_STR) : $(EX_STR_S)
 	@echo ""
@@ -98,7 +99,7 @@ $(OBJDIR_S)%.o: $(SRCDIR_S)%.c
 
 $(NAME_C): $(OBJ_C)
 	@mkdir -p $(BINDIR)
-	@$(CC) $(CFLAGS) -o $(BINDIR)$(NAME_C) $(LIBS) $^
+	@$(CC) $(CFLAGS) -o $(BIN_C) $(LIBS) $^
 	@echo ""
 	@echo $(PX_STR) : $(EX_STR_C)
 	@echo ""
