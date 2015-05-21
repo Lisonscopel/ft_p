@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/21 15:53:09 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/21 16:02:21 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int						server_login(int sock)
 	{
 		if (!(ft_strcmp(line, buff)))
 		{
-			send(sock, "", 1, 0);
+			send(sock, "gotit", 5, 0);
 			return (0);
 		}
 	}

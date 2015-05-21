@@ -6,7 +6,7 @@ int		login(int sock)
 	char	*line;
 	char	*line2;
 
-	send(sock, "okcbon", 6, 0);
+	send(sock, "okcbon", 7, 0);
 	ft_putendl("Login:");
 	get_next_line(0, &line);
 	ft_putendl("Password:");
@@ -14,7 +14,7 @@ int		login(int sock)
 	line = ft_strjoin(line, ":");
 	line = ft_strjoin(line, line2);
 	recv(sock, buff, 1023, 0);
-	send(sock, line, ft_strlen(line), 0);
+	send(sock, line, ft_strlen(line) + 1, 0);
 	recv(sock, buff, 1023, 0);
 	if (!(ft_strcmp(buff, "shameonyou")))
 	{
