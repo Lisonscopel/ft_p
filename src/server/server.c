@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/21 16:02:21 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/21 16:26:18 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int						main(int ac, char **av)
 				close(cs);
 				close(sock);
 				exit(0);
-				return (-1);
 			}
 			dial_client(cs);
 			close(cs);
