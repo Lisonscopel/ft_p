@@ -5,7 +5,6 @@
 # include <dirent.h>
 # include <sys/stat.h>
 
-int					login(void);
 void				dial_client(int cs);
 void				init(t_fct **list);
 
