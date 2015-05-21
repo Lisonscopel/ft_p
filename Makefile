@@ -6,7 +6,7 @@
 #    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/05 22:37:19 by tlepeche          #+#    #+#              #
-#    Updated: 2015/05/20 17:42:03 by sduprey          ###   ########.fr        #
+#    Updated: 2015/05/21 16:19:42 by sduprey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,14 +77,17 @@ SRCDIR_C = $(SRCDIR)client/
 SRCDIR_S = $(SRCDIR)server/
 
 BINDIR = bin/
-BIN_S = $(addprefix $(BINDIR),$(NAME_S))
-BIN_C = $(addprefix $(BINDIR),$(NAME_C))
+BIN_S = $(addprefix $(BINDIR), $(NAME_S))
+BIN_C = $(addprefix $(BINDIR), $(NAME_C))
 
 .PHONY: all clean fclean re proper debug debugall
 
 all: lft lnw $(NAME_C) $(NAME_S)
 
-$(NAME_S): $(OBJ_S)
+$(NAME_S): $(BIN_S)
+$(NAME_C): $(BIN_C)
+
+$(BIN_S): $(OBJ_S)
 	@mkdir -p $(BINDIR)
 	@$(CC) $(CFLAGS) -o $(BIN_S) $(LIBS) $^
 	@echo ""
@@ -97,7 +100,7 @@ $(OBJDIR_S)%.o: $(SRCDIR_S)%.c
 	@$(CC) -c $(CFLAGS) $(INC) $< -o $@
 	@echo $(CC_STR) $*
 
-$(NAME_C): $(OBJ_C)
+$(BIN_C): $(OBJ_C)
 	@mkdir -p $(BINDIR)
 	@$(CC) $(CFLAGS) -o $(BIN_C) $(LIBS) $^
 	@echo ""
