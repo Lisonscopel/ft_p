@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:22:10 by sduprey           #+#    #+#             */
-/*   Updated: 2015/05/20 18:27:06 by vpailhe          ###   ########.fr       */
+/*   Updated: 2015/05/21 15:53:09 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,28 @@ int						server_login(int sock)
 {
 	int		ret = 0;
 	char	buff[1024];
+	char	*line = NULL;
+	int		fd;
 
-	while ((ft_strcmp(buff, "okcbon"))) 
+	while (1) 
 	{
 		ret = recv(sock, buff, 1023, 0);
-		buff[ret] = 0;
+		if (!(ft_strcmp(buff, "okcbon"))) 
+			break ;
 	}
-	ft_putendl("A");
-	send(sock, "wfyl", 5, 0);
+	send(sock, "wfyl", 4, 0);
 	ret = recv(sock, buff, 1023, 0);
-	buff[ret] = 0;
-	ft_putendl(buff);
-	//ft_strcmp(buff, )
-	return (0);
+	fd = open(".log", O_RDONLY);
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (!(ft_strcmp(line, buff)))
+		{
+			send(sock, "", 1, 0);
+			return (0);
+		}
+	}
+	send(sock, "shameonyou", 10, 0);
+	return (-1);
 }
 
 int						main(int ac, char **av)
@@ -49,8 +58,13 @@ int						main(int ac, char **av)
 //		prompt_display(cs);
 		if (fork()  == 0)
 		{
-			if (!(server_login(sock)))
+			if ((server_login(cs)) == -1)
+			{
+				close(cs);
+				close(sock);
 				exit(0);
+				return (-1);
+			}
 			dial_client(cs);
 			close(cs);
 			exit(0);

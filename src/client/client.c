@@ -6,22 +6,22 @@ int		login(int sock)
 	char	*line;
 	char	*line2;
 
-	ft_putendl("yo");
-
 	send(sock, "okcbon", 6, 0);
-
 	ft_putendl("Login:");
 	get_next_line(0, &line);
 	ft_putendl("Password:");
 	get_next_line(0, &line2);
 	line = ft_strjoin(line, ":");
 	line = ft_strjoin(line, line2);
-
 	recv(sock, buff, 1023, 0);
-
 	send(sock, line, ft_strlen(line), 0);
-
-	ft_putendl(line);
+	recv(sock, buff, 1023, 0);
+	if (!(ft_strcmp(buff, "shameonyou")))
+	{
+		ft_putendl("Wrong Password you jerk");
+		return (-1);
+	}
+	ft_putendl("Welcome!");
 	return (0);
 }
 
@@ -52,8 +52,11 @@ int			main(int ac, char **av)
 		ft_usage(av[0], " <addr> <port>");
 	port = ft_atoi(av[2]);
 	sock = client_create_tcp(av[1], port);
-	if (login(sock))
+	if (login(sock) == -1)
+	{
+		close(sock);
 		return (0);
+	}
 	while (42)
 	{
 		prompt(sock);
