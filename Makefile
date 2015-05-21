@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lscopel <marvin@42.fr>                     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/05/21 17:02:01 by lscopel           #+#    #+#              #
-#    Updated: 2015/05/21 17:02:40 by lscopel          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME_S		= server
 NAME_SERV	= serveur
 NAME_C		= client
@@ -24,12 +12,14 @@ SRC_S_NAME	=	server.c \
 				server_ask_ls.c \
 				server_ask_pwd.c \
 				server_ask_put.c \
+				server_password.c \
 
 SRC_C_NAME	=	client.c \
 				init.c \
 				dial_server.c \
 				ask_quit.c \
 				client_ask_put.c \
+				client_password.c \
 
 NO_COLOR = "\033[0;0m"
 CC_COLOR = "\033[0;33m"
