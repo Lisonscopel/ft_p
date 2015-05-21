@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 01:33:10 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/11 19:42:59 by tlepeche         ###   ########.fr       */
+/*   Updated: 2015/05/21 16:47:32 by lscopel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char				*ft_strtrim(char const *s);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strreplace(char *str, char *rem, char *rep);
+char				*ft_strnchr(const char *s, int c, int i);	
 char				**ft_strsplit(char const *s, char c);
 char				**ft_strssplit(char const *s, char *pattern);
 char				**ft_strsplit_blank(char const *s);
@@ -137,6 +138,7 @@ int					get_next_line(int fd, char **line);
 /*
 ** Utils
 */
+int					how_many(char *str, char c);
 void				ft_usage(char *prog_name, char *args);
 void				ft_free_tab(char **tab);
 
