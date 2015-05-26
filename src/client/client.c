@@ -1,8 +1,9 @@
 #include "client.h"
 
-static void	prompt(int sock)
+static void	prompt(int sock, char *login)
 {
 	char	buff[1024];
+	char	*print;
 	int		ret;
 
 	ret = 0;
@@ -13,7 +14,14 @@ static void	prompt(int sock)
 		exit(0);
 	}
 	buff[ret] = '\0';
-	ft_putstr(buff);
+	print = buff;
+	if (login)
+	{
+		login = ft_strjoin("[", login);
+		login = ft_strjoin(login, "] ");
+		print = ft_strjoin(login, buff);
+	}
+	ft_putcolor(print, 33);
 }
 
 int			main(int ac, char **av)
@@ -22,19 +30,20 @@ int			main(int ac, char **av)
 	char	*line;
 	int		port;
 	int		sock;
+	char	*login;
 
 	if (ac != 3)
 		ft_usage(av[0], " <addr> <port>");
 	port = ft_atoi(av[2]);
 	sock = client_create_tcp(av[1], port);
-	if (client_login(sock) == -1)
+	if (client_login(sock, &login) == -1)
 	{
 		close(sock);
 		return (0);
 	}
 	while (42)
 	{
-		prompt(sock);
+		prompt(sock, login);
 		if ((ret = get_next_line(0, &line)) <= 0)
 			ft_putcolorendl("ERROR", 94);
 		else if (line[0] != '\0')

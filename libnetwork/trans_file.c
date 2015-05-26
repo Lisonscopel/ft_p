@@ -15,6 +15,11 @@ int					send_file(char **path, int socket)
 			fstat(fd, &st);
 			char *size = ft_itoa(st.st_size);
 			ft_putendl(size);
+			if (st.st_size == 0)
+			{
+				send(socket, "0", 2, 0);
+				return (0);
+			}
 			send(socket, size, ft_strlen(size), 0);
 			recv(socket, &tmp, 1, 0);
 			while ((ret = read(fd, buff, 1)) > 0)
@@ -85,7 +90,6 @@ int					create_file(char *path)
 	return (0);
 }
 
-
 static int			read_file(int socket, int fd, int size)
 {
 	char			buff[1024];
@@ -119,11 +123,15 @@ int					receive_file(char **path, int socket)
 		ft_putendl("ERROR");
 		return (0);
 	}
-	size = ft_atoi(buff);
+	if ((size = ft_atoi(buff)) == 0)
+	{
+		ft_putendl("SUCCESS");
+		return (create_file(path[1]));
+	}
 	send(socket, "", 1, 0);
 	ret = recv(socket, buff, 1023, 0);
 	fd = 0;
-	if (buff[0] != '\0')
+	if (buff[0] != '\0' && size != 0)
 	{
 		buff[ret] = '\0';
 		good_path = path[1];
@@ -134,7 +142,7 @@ int					receive_file(char **path, int socket)
 		send(socket, "", 1, 0);
 	}
 	read_file(socket, fd, size);
-	if (fd > 0)
+	if (fd > 0 || size == 0)
 	{
 		ft_putendl("SUCCESS");
 		close(fd);

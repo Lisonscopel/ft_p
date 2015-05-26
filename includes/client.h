@@ -8,6 +8,6 @@ void	init(t_fct **list);
 int		ask_get(char **new_av, int sock);
 int		ask_quit(char **new_av, int sock);
 int		ask_put(char **path, int socket);
-int		client_login(int sock);
+int		client_login(int sock, char **login);
 
 #endif

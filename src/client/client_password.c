@@ -1,16 +1,15 @@
 #include "client.h"
 
-int		client_login(int sock)
+int		client_login(int sock, char **login)
 {
 	char	buff[1024];
 	char	*line;
 	char	*line2;
-	char	*name;
 
 	send(sock, "okcbon", 7, 0);
 	ft_putendl("Login:");
 	get_next_line(0, &line);
-	name = ft_strdup(line);
+	*login = ft_strdup(line);
 	ft_putendl("Password:");
 	get_next_line(0, &line2);
 	line = ft_strjoin(line, ":");
@@ -24,7 +23,7 @@ int		client_login(int sock)
 		return (-1);
 	}
 	ft_putstr("Welcome ");
-	ft_putcolor(name, 1);
+	ft_putcolor(*login, 1);
 	ft_putendl(" !");
 	return (0);
 }
