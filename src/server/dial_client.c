@@ -48,7 +48,10 @@ void	dial_client(int cs)
 			tmp = tmp->next;
 		}
 		if (bool == 0)
-			send(cs, "ERROR Command not found", 32, 0);
+		{
+			ft_putcolorendl(new_av[0], 31);
+			send(cs, "ERROR Command not found", 23, 0);
+		}
 		byte_reception(new_av, buf, ret);
 	}
 }

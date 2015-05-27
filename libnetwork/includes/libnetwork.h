@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/10 14:15:19 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/21 17:21:48 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/18 20:01:17 by vpailhe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include <sys/stat.h>
+# include <dirent.h>
+#include <sys/types.h>
+#include <sys/dir.h>
 
 # include "libft.h"
 
