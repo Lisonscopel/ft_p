@@ -19,6 +19,9 @@ int		ask_get(char **av, int fd);
 char	*get_root(void);
 int		display_prompt(char **new_av, int sock);
 int		server_login(int sock);
+int		lls(char **path, int socket);
+int		lpwd(char **path, int socket);
+int		lcd(char **path, int socket);
 
 /*
  * PUT

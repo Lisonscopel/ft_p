@@ -13,6 +13,7 @@ SRC_S_NAME	=	server.c \
 				server_ask_pwd.c \
 				server_ask_put.c \
 				server_password.c \
+				ls_funcs.c \
 
 SRC_C_NAME	=	client.c \
 				init.c \
@@ -20,6 +21,7 @@ SRC_C_NAME	=	client.c \
 				ask_quit.c \
 				client_ask_put.c \
 				client_password.c \
+				lc_funcs.c \
 
 NO_COLOR = "\033[0;0m"
 CC_COLOR = "\033[0;33m"

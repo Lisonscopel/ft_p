@@ -9,5 +9,8 @@ int		ask_get(char **new_av, int sock);
 int		ask_quit(char **new_av, int sock);
 int		ask_put(char **path, int socket);
 int		client_login(int sock, char **login);
+int		lls(char **path, int socket);
+int		lpwd(char **path, int socket);
+int		lcd(char **path, int socket);
 
 #endif

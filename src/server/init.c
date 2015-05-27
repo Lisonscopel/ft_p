@@ -30,6 +30,9 @@ void			init(t_fct **list)
 	*list = list_add(list, "get", &(send_file));
 	*list = list_add(list, "put", &(ask_put));
 	*list = list_add(list, "affiche_mon_prompt_steuple_thx_bye", &(display_prompt));
+	*list = list_add(list, "lcd", &(lcd));
+	*list = list_add(list, "lpwd", &(lpwd));
+	*list = list_add(list, "lls", &(lls));
 	//	list_add(list, "bonjour", &(ask_bonjour));
 	//	list_add(list, "quit", &(ask_quit));
 }

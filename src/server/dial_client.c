@@ -1,6 +1,5 @@
 #include "server.h"
 
-
 void	byte_reception(char **new_av, char *buf, int ret)
 {
 	ft_putstr("received ");

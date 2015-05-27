@@ -1,6 +1,6 @@
 #include "client.h"
 
-void		no_action(int sock)
+static void			no_action(int sock)
 {
 	int		ret;
 	char	buf[32768];
@@ -23,16 +23,7 @@ void		no_action(int sock)
 		}
 }
 
-int			mult_get(char *name, char **t)
-{
-	if (ft_strcmp(name, t[0]))
-		return (0);
-	if (t[2])
-		return (1);
-	return (0);
-}
-
-char		*join_cmd(char **t)
+static char			*join_cmd(char **t)
 {
 	char	*rtn;
 	int		i;
@@ -47,7 +38,7 @@ char		*join_cmd(char **t)
 	return (rtn);
 }
 
-void		dial_server(int sock, char *line)
+void				dial_server(int sock, char *line)
 {
 	t_fct	*list;
 	int		bool;
@@ -64,7 +55,7 @@ void		dial_server(int sock, char *line)
 		if (new_av[0] && ft_strcmp(tmp->name, new_av[0]) == 0)
 		{
 			tmp->ptr_funct(new_av, sock);
-			if (mult_get(tmp->name, new_av))
+			if (ft_strcmp(tmp->name, "get") == 0 && new_av[2] != NULL)
 				dial_server(sock, join_cmd(new_av));
 			bool = 1;
 			break ;
