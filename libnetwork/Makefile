@@ -1,20 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/05/10 15:14:03 by ghilbert          #+#    #+#              #
-#    Updated: 2015/05/21 17:21:36 by lscopel          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = libnetwork.a
 
 SRC = serv_create_tcp.c \
-	  client_create_tcp.c \
-	  trans_file.c \
+		client_create_tcp.c \
+		trans_file.c \
+		send.c
 
 OBJDIR = obj/
 
