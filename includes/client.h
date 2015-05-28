@@ -12,5 +12,6 @@ int		client_login(int sock, char **login);
 int		lls(char **path, int socket);
 int		lpwd(char **path, int socket);
 int		lcd(char **path, int socket);
+int		client_report(int n, int cs);
 
 #endif

@@ -1,5 +1,11 @@
 #include "server.h"
 
+void					close_exit(int socket)
+{
+	close(socket);
+	exit(0);
+}
+
 int						main(int ac, char **av)
 {
 	int					port;
@@ -15,20 +21,16 @@ int						main(int ac, char **av)
 	while (42)
 	{
 		cs = accept(sock, (struct sockaddr *)&csin, &cslen);
-//		prompt_display(cs);
-		if (fork()  == 0)
+		if (fork() == 0)
 		{
 			if ((server_login(cs)) == -1)
 			{
 				close(cs);
-				close(sock);
-				exit(0);
+				close_exit(sock);
 			}
 			dial_client(cs);
-			close(cs);
-			exit(0);
+			close_exit(cs);
 		}
 	}
-	close(sock);
-	exit(0);
+	close_exit(sock);
 }

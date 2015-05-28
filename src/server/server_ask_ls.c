@@ -1,23 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   server_ask_ls.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tlepeche <tlepeche@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/11 14:16:33 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/27 19:58:28 by vpailhe          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "server.h"
 
-static int	check_av(char *str)
+static int		check_av(char *str)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	while	(str[i])
+	while (str[i])
 	{
 		if (str[i] == 'A' || str[i] == 'l' || str[i] == 'R')
 			i++;
@@ -27,10 +15,10 @@ static int	check_av(char *str)
 	return (1);
 }
 
-static char *choose_option(char **av)
+static char		*choose_option(char **av)
 {
-	int i;
-	char *option;
+	int		i;
+	char	*option;
 
 	i = 1;
 	option = ft_strnew(1023);
@@ -40,7 +28,7 @@ static char *choose_option(char **av)
 		if (av[i][0] == '-' && check_av(av[i]) == 1)
 			option = ft_strcat(option, av[i] + 1);
 		else
-			break;
+			break ;
 		i++;
 	}
 	if (option[1])
@@ -49,11 +37,11 @@ static char *choose_option(char **av)
 		return (NULL);
 }
 
-int			ask_list(char **av, int fd)
+int				ask_list(char **av, int fd)
 {
-	pid_t	father;
-	int		status;
-	char	*av_ls[3];
+	pid_t		father;
+	int			status;
+	char		*av_ls[3];
 
 	(void)av;
 	av_ls[0] = ft_strdup("ls");

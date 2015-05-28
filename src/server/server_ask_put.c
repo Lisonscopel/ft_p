@@ -65,7 +65,7 @@ static void	read_file(int socket, int fd, int size)
 {
 	char	buff[1024];
 	int		ret;
-	
+
 	while (size > 0)
 	{
 		ret = recv(socket, buff, 1023, 0);
@@ -76,7 +76,7 @@ static void	read_file(int socket, int fd, int size)
 	}
 }
 
-int		ask_put(char **path, int socket)
+int			ask_put(char **path, int socket)
 {
 	int		ret;
 	char	buff[1024];
@@ -88,15 +88,9 @@ int		ask_put(char **path, int socket)
 	ret = recv(socket, buff, 1023, 0);
 	buff[ret] = '\0';
 	if (ft_strncmp(buff, "ER1", 3) == 0)
-	{
-		send(socket, "ERROR put: file doesn't exists", 30, 0);
-		return (-1);
-	}
+		return (put_error(1, socket));
 	else if (ft_strncmp(buff, "ER2", 3) == 0)
-	{
-		send(socket, "ERROR put: too few arguments", 28, 0);
-		return (-1);
-	}
+		return (put_error(2, socket));
 	size = ft_atoi(buff);
 	good_path = path[1];
 	fd = put_create_file(good_path, socket);

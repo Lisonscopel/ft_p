@@ -1,0 +1,5 @@
+- erreur lors du get d'un fichier vide => tourne en boucle "Command not foudn"
+- get fichier inexistant
+- lcd pas cool
+- error lors du put file d'un fichier inexistant
+- Make qui pretend recompiler des trucs mais ne le fais pas, il faut faire make re (lison)

@@ -19,38 +19,43 @@ int		display_prompt(char **new_av, int sock)
 	return (1);
 }
 
+static int	cmd_handler(t_fct *tmp, char *buf, char ***new_av, int cs)
+{
+	int		bool;
+
+	*new_av = ft_strsplit_blank(buf);
+	printf("av[0] = %s\n", *new_av[0]);
+	bool = 0;
+	while (tmp != NULL)
+	{
+		if (*new_av[0] && ft_strcmp(tmp->name, *new_av[0]) == 0)
+		{
+			bool = 1;
+			tmp->ptr_funct(*new_av, cs);
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 void	dial_client(int cs)
 {
 	int		ret;
-	int		bool;
 	char	**new_av;
 	char	buf[1024];
 	t_fct	*list;
 	t_fct	*tmp;
-	int		ret_val;
 
 	init(&list);
+	tmp = list;
 	while ((ret = recv(cs, buf, 1023, 0)) > 0)
 	{
-		tmp = list;
 		buf[ret] = '\0';
-		new_av = ft_strsplit_blank(buf);
-		printf("av[0] = %s\n", new_av[0]);
-		bool = 0;
-		while (tmp != NULL)
-		{
-			if (new_av[0] && ft_strcmp(tmp->name, new_av[0]) == 0)
-			{
-				bool = 1;
-				ret_val = tmp->ptr_funct(new_av, cs);
-				break ;
-			}
-			tmp = tmp->next;
-		}
-		if (bool == 0)
+		if (cmd_handler(tmp, buf, &new_av, cs) == 0)
 		{
 			ft_putcolorendl(new_av[0], 31);
-			send(cs, "ERROR Command not found", 23, 0);
+			put_error(3, cs);
 		}
 		byte_reception(new_av, buf, ret);
 	}
