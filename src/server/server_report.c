@@ -1,6 +1,6 @@
 #include "server.h"
 
-int			put_error(int n, int cs)
+int			server_report(int n, int cs)
 {
 	if (n == 0)
 		send(cs, "ERROR cd: No such file or directory", 36, 0);

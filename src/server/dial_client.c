@@ -55,7 +55,7 @@ void	dial_client(int cs)
 		if (cmd_handler(tmp, buf, &new_av, cs) == 0)
 		{
 			ft_putcolorendl(new_av[0], 31);
-			put_error(3, cs);
+			server_report(3, cs);
 		}
 		byte_reception(new_av, buf, ret);
 	}

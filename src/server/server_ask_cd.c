@@ -60,7 +60,7 @@ int		move_dir(char *tar_dir, char *cur_dir, char *root, int fd)
 	if (dir_cmp(tar_dir, root) == 0)
 	{
 		chdir(cur_dir);
-		return (put_error(4, fd));
+		return (server_report(4, fd));
 	}
 	else
 		send(fd, "", 1, 0);
@@ -88,5 +88,5 @@ int		ask_cd(char **av, int fd)
 	if (check_access(tar_dir) == 1)
 		return (move_dir(tar_dir, cur_dir, root, fd));
 	else
-		return (put_error(0, fd));
+		return (server_report(0, fd));
 }

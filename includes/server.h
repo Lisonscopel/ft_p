@@ -22,7 +22,7 @@ int		server_login(int sock);
 int		lls(char **path, int socket);
 int		lpwd(char **path, int socket);
 int		lcd(char **path, int socket);
-int		put_error(int n, int cs);
+int		server_report(int n, int cs);
 
 /*
  * PUT
