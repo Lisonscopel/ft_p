@@ -3,12 +3,12 @@
 int			lcd(char **path, int socket)
 {
 	(void)socket;
-	if (chdir(path[1]) == -1)
+	if (path[1] && chdir(path[1]) == -1)
 	{
-		ft_putstr("ERROR\n");
+		ft_putendl("ERROR");
 		return (0);
 	}
-	ft_putstr("SUCCES\n");
+	ft_putendl("SUCCESS");
 	return (1);
 }
 
@@ -21,7 +21,7 @@ int			lpwd(char **path, int socket)
 	pwd = ft_strnew(1024);
 	if (!getcwd(pwd, 1023))
 	{
-		ft_putstr("ERROR\n");
+		ft_putendl("ERROR");
 		return (0);
 	}
 	ft_putendl(pwd);

@@ -1,20 +1,5 @@
 #include "server.h"
 
-static int		check_av(char *str)
-{
-	int	i;
-
-	i = 1;
-	while (str[i])
-	{
-		if (str[i] == 'A' || str[i] == 'l' || str[i] == 'R')
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
 static char		*choose_option(char **av)
 {
 	int		i;
@@ -25,7 +10,7 @@ static char		*choose_option(char **av)
 	option[0] = '-';
 	while (av[i])
 	{
-		if (av[i][0] == '-' && check_av(av[i]) == 1)
+		if (av[i][0] == '-')
 			option = ft_strcat(option, av[i] + 1);
 		else
 			break ;
@@ -42,6 +27,7 @@ int				ask_list(char **av, int fd)
 	pid_t		father;
 	int			status;
 	char		*av_ls[3];
+	char		end;
 
 	(void)av;
 	av_ls[0] = ft_strdup("ls");
@@ -53,9 +39,12 @@ int				ask_list(char **av, int fd)
 	if (father == 0)
 	{
 		dup2(fd, 1);
+		dup2(fd, 2);
 		if (execv("/bin/ls", av_ls) == -1)
 			exit(-1);
 	}
 	free(av_ls[0]);
+	end = 4;
+	send(fd, &end, 1, 0);
 	return (1);
 }
