@@ -1,6 +1,6 @@
 #include "server.h"
 
-static char					*get_log(void)
+static char				*get_log(void)
 {
 	int		i;
 	char	**tmp;
@@ -23,17 +23,16 @@ static char					*get_log(void)
 
 int						server_login(int sock)
 {
-	int		ret = 0;
+	int		ret;
 	char	buff[1024];
-	char	*line = NULL;
+	char	*line;
 	int		fd;
 
-	while (1) 
-	{
+	ret = 0;
+	line = NULL;
+	buff[0] = '\0';
+	while (ft_strcmp(buff, "okcbon"))
 		ret = recv(sock, buff, 1023, 0);
-		if (!(ft_strcmp(buff, "okcbon"))) 
-			break ;
-	}
 	send(sock, "wfyl", 4, 0);
 	ret = recv(sock, buff, 1023, 0);
 	fd = open(get_log(), O_RDONLY);

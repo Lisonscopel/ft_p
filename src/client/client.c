@@ -24,6 +24,12 @@ static void	prompt(int sock, char *login)
 	ft_putcolor(print, 33);
 }
 
+int			close_sock(int sock)
+{
+	close(sock);
+	return (0);
+}
+
 int			main(int ac, char **av)
 {
 	int		ret;
@@ -37,10 +43,7 @@ int			main(int ac, char **av)
 	port = ft_atoi(av[2]);
 	sock = client_create_tcp(av[1], port);
 	if (client_login(sock, &login) == -1)
-	{
-		close(sock);
-		return (0);
-	}
+		return (close_sock(sock));
 	while (42)
 	{
 		prompt(sock, login);
@@ -50,6 +53,5 @@ int			main(int ac, char **av)
 			dial_server(sock, line);
 		free(line);
 	}
-	close(sock);
-	return (0);
+	return (close_sock(sock));
 }

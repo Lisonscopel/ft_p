@@ -1,7 +1,8 @@
-/////////// CLIENT, ENVOI /////////
+/*/////////// CLIENT, ENVOI /////////
 //	buff[0] == 'Q' -> question -> fichier deja existant
 //	buff[0] == 'R' -> demande pour le rename
-//	buff[0] == 'K' -> fin des question / pas de question et fichier existant -> debut de la copie
+//	buff[0] == 'K' -> fin des question 
+//	/ pas de question et fichier existant -> debut de la copie*/
 
 #include "client.h"
 
@@ -57,9 +58,7 @@ int		ask_put(char **path, int socket)
 				return (1);
 			}
 		}
-		send(socket, "ER1", 3, 0);
-		return (-1);
+		return (client_report(0, socket));
 	}
-	send(socket, "ER2", 3, 0);
-	return (-1);
+	return (client_report(1, socket));
 }

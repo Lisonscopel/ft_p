@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   server_ask_cd.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/10 19:55:57 by tlepeche          #+#    #+#             */
-/*   Updated: 2015/05/17 19:16:12 by lscopel          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "server.h"
 
 char	*get_root(void)
@@ -72,8 +60,7 @@ int		move_dir(char *tar_dir, char *cur_dir, char *root, int fd)
 	if (dir_cmp(tar_dir, root) == 0)
 	{
 		chdir(cur_dir);
-		send(fd, "ERROR cd: Can't go further than server root directory", 54, 0);
-		return (-1);
+		return (put_error(4, fd));
 	}
 	else
 		send(fd, "", 1, 0);
@@ -101,8 +88,5 @@ int		ask_cd(char **av, int fd)
 	if (check_access(tar_dir) == 1)
 		return (move_dir(tar_dir, cur_dir, root, fd));
 	else
-	{
-		send(fd, "ERROR cd: No such file or directory", 36, 0);
-		return (-1);
-	}
+		return (put_error(0, fd));
 }

@@ -5,22 +5,22 @@ static void			no_action(int sock)
 	int		ret;
 	char	buf[32768];
 
-		while ((ret = recv(sock, buf, 32767, 0)))
+	while ((ret = recv(sock, buf, 32767, 0)))
+	{
+		buf[ret] = '\0';
+		if (ft_strncmp("ERROR ", buf, 6) != 0)
 		{
-			buf[ret] = '\0';
-			if (ft_strncmp("ERROR ", buf, 6) != 0)
-			{
-				ft_putcolorendl("SUCCESS", 32);
-				ft_putstr(buf);
-			}
-			else
-			{
-				ft_putcolorendl("ERROR", 31);
-				ft_putendl(buf + 6);
-			}
-			if (ret < 32767)
-				break ;
+			ft_putcolorendl("SUCCESS", 32);
+			ft_putstr(buf);
 		}
+		else
+		{
+			ft_putcolorendl("ERROR", 31);
+			ft_putendl(buf + 6);
+		}
+		if (ret < 32767)
+			break ;
+	}
 }
 
 static char			*join_cmd(char **t)
@@ -29,7 +29,7 @@ static char			*join_cmd(char **t)
 	int		i;
 
 	i = 2;
-	while(t[i])
+	while (t[i])
 	{
 		rtn = ft_strjoin(rtn, " ");
 		rtn = ft_strjoin(rtn, t[i]);
@@ -49,6 +49,11 @@ void				dial_server(int sock, char *line)
 	init(&list);
 	tmp = list;
 	new_av = ft_strsplit_blank(line);
+	if (ft_strcmp(new_av[0], "get") == 0 && new_av[1] == NULL)
+	{
+		client_report(2, sock);
+		return ;
+	}
 	send(sock, line, ft_strlen(line), 0);
 	while (tmp != NULL)
 	{
