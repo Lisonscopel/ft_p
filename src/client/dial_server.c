@@ -1,26 +1,32 @@
 #include "client.h"
 
-static void			no_action(int sock)
+static void			no_action(int sock, char *fct)
 {
 	int		ret;
 	char	buf[32768];
+	int		ok;
 
+	ok = 0;
 	while ((ret = recv(sock, buf, 32767, 0)))
 	{
 		buf[ret] = '\0';
 		if (ft_strncmp("ERROR ", buf, 6) != 0)
 		{
-			ft_putcolorendl("SUCCESS", 32);
+			ok = 1;
 			ft_putstr(buf);
 		}
 		else
-		{
-			ft_putcolorendl("ERROR", 31);
 			ft_putendl(buf + 6);
-		}
-		if (ret < 32767)
+		if (ft_strcmp(fct, "ls") != 0 && ret < 32767)
+			break ;
+		else if (ft_strcmp(fct, "ls") == 0 && buf[0] == 4 && ret == 1)
 			break ;
 	}
+	if (ok != 0)
+		ft_putcolorendl("SUCCESS", 32);
+	else
+		ft_putcolorendl("ERROR", 31);
+
 }
 
 static char			*join_cmd(char **t)
@@ -29,6 +35,8 @@ static char			*join_cmd(char **t)
 	int		i;
 
 	i = 2;
+	rtn = NULL;
+	rtn = ft_strdup(t[0]);
 	while (t[i])
 	{
 		rtn = ft_strjoin(rtn, " ");
@@ -68,5 +76,5 @@ void				dial_server(int sock, char *line)
 		tmp = tmp->next;
 	}
 	if (bool == 0)
-		no_action(sock);
+		no_action(sock, new_av[0]);
 }
