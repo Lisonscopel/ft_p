@@ -49,6 +49,11 @@ void				dial_server(int sock, char *line)
 	init(&list);
 	tmp = list;
 	new_av = ft_strsplit_blank(line);
+	if (ft_strcmp(new_av[0], "get") == 0 && new_av[1] == NULL)
+	{
+		client_report(2, sock);
+		return ;
+	}
 	send(sock, line, ft_strlen(line), 0);
 	while (tmp != NULL)
 	{

@@ -79,6 +79,7 @@ int					receive_dir(char **path, int socket)
 	int		ret;
 	// struct dirent	*s;
 
+	ft_putcolorendl("receive_dir", 32);
 	send(socket, "in receive_dir", 14, 0);
 	mkdir(path[1], 0755);
 	chdir(path[1]);
@@ -151,6 +152,12 @@ int					receive_file(char **path, int socket)
 	{
 		ft_putendl("SUCCESS");
 		return (create_file(path[1]));
+	}
+	else if (size == -1)
+	{
+		ft_putendl("get : File doesn't exist, Dick Head !");
+		send(socket, "", 1, 0);
+		return (-1);
 	}
 	send(socket, "", 1, 0);
 	ret = recv(socket, buff, 1023, 0);
