@@ -27,8 +27,8 @@ void			init(t_fct **list)
 	*list = list_add(list, "ls", &(ask_list));
 	*list = list_add(list, "cd", &(ask_cd));
 	*list = list_add(list, "pwd", &(ask_pwd));
-	*list = list_add(list, "get", &(send_file));
-	*list = list_add(list, "put", &(ask_put));
+	*list = list_add(list, "get", &(s_send));
+	*list = list_add(list, "put", &(s_receive_file));
 	*list = list_add(list, "affiche_mon_prompt_steuple_thx_bye",\
 			&(display_prompt));
 	*list = list_add(list, "lcd", &(lcd));

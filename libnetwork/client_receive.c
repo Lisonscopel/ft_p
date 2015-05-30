@@ -26,7 +26,7 @@ static int			choose_stuff(char *path, int fd)
 		ft_putstr("New name : ");
 		get_next_line(0, &line);
 		close(fd);
-		return (create_file(line));
+		return (c_create_file(line));
 	}
 	else if (line[0] == 'O')
 	{
@@ -39,7 +39,7 @@ static int			choose_stuff(char *path, int fd)
 	return (0);
 }
 
-int					create_file(char *path)
+int					c_create_file(char *path)
 {
 	char			*good_path;
 	int				fd;
@@ -55,7 +55,7 @@ int					create_file(char *path)
 	return (0);
 }
 
-static int			read_file(int socket, int fd, int size)
+int			c_read_file(int socket, int fd, int size)
 {
 	char			buff[1024];
 	int				ret;
@@ -73,7 +73,7 @@ static int			read_file(int socket, int fd, int size)
 	return (0);
 }
 
-int					receive_dir(char **path, int socket)
+int					c_receive_dir(char **path, int socket)
 {
 	char	buff[1024];
 	int		ret;
@@ -112,7 +112,7 @@ int					receive_dir(char **path, int socket)
 				ft_putcolorendl(buff, 31);
 				path[1] = ft_strdup(buff);
 				send(socket, "go", 2, 0);
-				receive_file(path, socket);
+				c_receive_file(path, socket);
 			}
 			else
 				send(socket, "ok", 2, 0);
@@ -129,7 +129,7 @@ int					receive_dir(char **path, int socket)
 	return (1);
 }
 
-int					receive_file(char **path, int socket)
+int					c_receive_file(char **path, int socket)
 {
 	int				ret;
 	int				fd;
@@ -142,7 +142,7 @@ int					receive_file(char **path, int socket)
 		return (0);
 	if (!(ft_strcmp(buff, "file") == 0))
 	{
-		return (receive_dir(path, socket));
+		return (c_receive_dir(path, socket));
 	}
 	ft_bzero(buff, 1023);
 	send(socket, "", 1, 0);
@@ -150,8 +150,9 @@ int					receive_file(char **path, int socket)
 		return (0);
 	if ((size = ft_atoi(buff)) == 0)
 	{
+		send(socket, "", 1, 0);
 		ft_putendl("SUCCESS");
-		return (create_file(path[1]));
+		return (c_create_file(path[1]));
 	}
 	else if (size == -1)
 	{
@@ -166,13 +167,13 @@ int					receive_file(char **path, int socket)
 	{
 		buff[ret] = '\0';
 		good_path = path[1];
-		fd = create_file(good_path);
+		fd = c_create_file(good_path);
 		if (fd <= 0)
-			return (read_file(socket, fd, size));
+			return (c_read_file(socket, fd, size));
 		write(fd, buff, ft_strlen(buff));
 		send(socket, "", 1, 0);
 	}
-	read_file(socket, fd, size);
+	c_read_file(socket, fd, size);
 	if (fd > 0 || size == 0)
 	{
 		ft_putendl("SUCCESS");

@@ -8,5 +8,7 @@ int			client_report(int n, int cs)
 		send(cs, "ER2", 3, 0);
 	if (n == 2)
 		ft_putendl("Usage : get <file> or <dir> [...]");
+	if (n == 3)
+		ft_putendl("Usage : put <file>");
 	return (-1);
 }

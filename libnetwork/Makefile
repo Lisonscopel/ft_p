@@ -1,9 +1,11 @@
 NAME = libnetwork.a
 
-SRC = serv_create_tcp.c \
-		client_create_tcp.c \
-		trans_file.c \
-		send.c
+SRC =	client_create_tcp.c \
+		client_receive.c \
+		client_send.c \
+		serv_create_tcp.c \
+		server_receive.c \
+		server_send.c
 
 OBJDIR = obj/
 
