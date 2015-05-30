@@ -61,7 +61,7 @@ int		put_create_file(char *path, int socket)
 	}
 }
 
-static void	read_file(int socket, int fd, int size)
+static void	read_file_put(int socket, int fd, int size)
 {
 	char	buff[1024];
 	int		ret;
@@ -97,7 +97,7 @@ int			ask_put(char **path, int socket)
 	if (fd != -1)
 	{
 		send(socket, "K", 1, 0);
-		read_file(socket, fd, size);
+		read_file_put(socket, fd, size);
 		close(fd);
 	}
 	return (0);

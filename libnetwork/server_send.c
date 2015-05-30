@@ -28,11 +28,6 @@ int					send_unique_file(char **path, int socket)
 		{
 			fstat(fd, &st);
 			size = ft_itoa(st.st_size);
-			if (st.st_size == 0)
-			{
-				send(socket, "0", 1, 0);
-				return (0);
-			}
 			send(socket, "file", 5, 0);
 			recv(socket, tmp, 1024, 0);
 			send(socket, size, ft_strlen(size), 0);
@@ -118,7 +113,7 @@ int					send_dir(char **path, int socket, int depth)
 	return (1);
 }
 
-int					send_file(char **path, int socket)
+int					s_send(char **path, int socket)
 {
 	if (!is_dir(path[1]))
 		return (send_unique_file(path, socket));

@@ -26,8 +26,8 @@ void			init(t_fct **list)
 	*list = NULL;
 	*list = list_add(list, "quit", &(ask_quit));
 	*list = list_add(list, "exit", &(ask_quit));
-	*list = list_add(list, "get", &(receive_file));
-	*list = list_add(list, "put", &(ask_put));
+	*list = list_add(list, "get", &(c_receive_file));
+	*list = list_add(list, "put", &(c_send));
 	*list = list_add(list, "lcd", &(lcd));
 	*list = list_add(list, "lpwd", &(lpwd));
 	*list = list_add(list, "lls", &(lls));
