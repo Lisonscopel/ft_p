@@ -58,7 +58,7 @@ int		ask_put(char **path, int socket)
 				return (1);
 			}
 		}
-		return (client_report(0, socket));
+		return (client_report(4, socket));
 	}
-	return (client_report(1, socket));
+	return (client_report(5, socket));
 }

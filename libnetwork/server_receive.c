@@ -1,19 +1,5 @@
 #include "libnetwork.h"
 
-static char			*get_path(char *s)
-{
-	char			*ret;
-
-	if (ft_strchr(s, '/'))
-	{
-		ret = ft_strrchr(s, '/');
-		ret++;
-	}
-	else
-		ret = s;
-	return (ret);
-}
-
 static int			choose_stuff(char *path, int fd)
 {
 	char			*line;

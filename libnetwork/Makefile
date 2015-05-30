@@ -2,6 +2,7 @@ NAME = libnetwork.a
 
 SRC =	client_create_tcp.c \
 		client_receive.c \
+		client_receive_utils.c \
 		client_send.c \
 		serv_create_tcp.c \
 		server_receive.c \
