@@ -14,7 +14,7 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strreplace.c \
 	  ft_strsplit.c ft_strssplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
 	  ft_tolower.c ft_toupper.c ft_usage.c get_next_line.c ft_free_tab.c \
-	  ft_strsplit_blank.c ft_how_many.c ft_strnchr.c \
+	  ft_strsplit_blank.c ft_how_many.c ft_strnchr.c get_path.c \
 
 NO_COLOR = "\033[0;0m"
 CC_COLOR = "\033[0;33m"

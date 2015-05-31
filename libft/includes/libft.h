@@ -6,7 +6,7 @@
 /*   By: ghilbert <ghilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 01:33:10 by lscopel           #+#    #+#             */
-/*   Updated: 2015/05/21 17:19:24 by lscopel          ###   ########.fr       */
+/*   Updated: 2015/05/30 23:04:34 by ghilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,9 @@ t_list				*ft_lstend(t_list *t);
 */
 int					ft_pow(int n, int p);
 
- /*
- ** Get Next Line 
- */
+/*
+** Get Next Line
+*/
 int					get_next_line(int fd, char **line);
 
 /*
@@ -141,5 +141,6 @@ int					get_next_line(int fd, char **line);
 int					how_many(char *str, char c);
 void				ft_usage(char *prog_name, char *args);
 void				ft_free_tab(char **tab);
+char				*get_path(char *s);
 
 #endif

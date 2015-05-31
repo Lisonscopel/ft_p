@@ -90,7 +90,7 @@ int			ask_put(char **path, int socket)
 	if (ft_strncmp(buff, "ER1", 3) == 0)
 		return (server_report(1, socket));
 	else if (ft_strncmp(buff, "ER2", 3) == 0)
-		return (server_report(2, socket));
+		return (server_report(5, socket));
 	size = ft_atoi(buff);
 	good_path = path[1];
 	fd = put_create_file(good_path, socket);

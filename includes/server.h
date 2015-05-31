@@ -25,9 +25,9 @@ int		lcd(char **path, int socket);
 int		server_report(int n, int cs);
 
 /*
- * PUT
- */
+** PUT
+*/
 int		put_create_file(char *path, int socket);
-int		ask_put(char** path, int socket);
+int		ask_put(char **path, int socket);
 
 #endif

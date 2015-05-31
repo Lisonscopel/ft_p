@@ -72,9 +72,10 @@ void				dial_server(int sock, char *line)
 	{
 		if (new_av[0] && ft_strcmp(tmp->name, new_av[0]) == 0)
 		{
-			tmp->ptr_funct(new_av, sock);
+			int ret = tmp->ptr_funct(new_av, sock);
 			if (ft_strcmp(tmp->name, "get") == 0 && new_av[2] != NULL)
 				dial_server(sock, join_cmd(new_av));
+			client_report(ret, 0);
 			bool = 1;
 			break ;
 		}
