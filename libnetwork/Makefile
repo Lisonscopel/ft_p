@@ -6,7 +6,8 @@ SRC =	client_create_tcp.c \
 		client_send.c \
 		serv_create_tcp.c \
 		server_receive.c \
-		server_send.c
+		server_send.c \
+		libnetwork_report.c
 
 OBJDIR = obj/
 

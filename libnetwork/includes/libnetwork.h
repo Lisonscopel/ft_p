@@ -46,5 +46,6 @@ int		c_send(char **path, int socket);
 /*
 **both
 */
+int		report(int err, int socket);
 
 #endif

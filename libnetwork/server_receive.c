@@ -1,6 +1,6 @@
 #include "libnetwork.h"
 
-static int			choose_stuff(char *path, int fd)
+static int	choose_stuff(char *path, int fd)
 {
 	char			*line;
 
@@ -12,7 +12,7 @@ static int			choose_stuff(char *path, int fd)
 	return (fd);
 }
 
-int					s_create_file(char *path)
+int			s_create_file(char *path)
 {
 	char			*good_path;
 	int				fd;
@@ -47,45 +47,13 @@ int			s_read_file(int socket, int fd, int size)
 	return (0);
 }
 
-int		s_receive_file(char **path, int socket)
+static int	fill_file(char *buff, char **path, int size, int socket)
 {
-	ft_putcolorendl("Server Receive File", 92);
+	int		fd;
+	int		ret;
+	char	*good_path;
 
-	int				ret;
-	int				fd;
-	char			buff[1024];
-	char			*good_path;
-	int				size;
-
-	ft_bzero(buff, 1023);
-	if ((ret = recv(socket, buff, 1023, 0)) == 0)
-		return (0);
-
-	if (!(ft_strcmp(buff, "file") == 0))
-		return (0);
-
-	ft_bzero(buff, 1023);
-
-	send(socket, "", 1, 0);
-	
-	if ((ret = recv(socket, buff, 1023, 0)) == 0)
-		return (0);
-	
-	if ((size = ft_atoi(buff)) == 0)
-	{
-		send(socket, "", 1, 0);
-		ft_putendl("SUCCESS");
-		return (s_create_file(path[1]));
-	}
-	else if (size == -1)
-	{
-		ft_putendl("put : File doesn't exist, Dick Head !");
-		send(socket, "", 1, 0);
-		return (-1);
-	}
-
-	send(socket, "", 1, 0);
-	ret = recv(socket, buff, 1023, 0); 
+	ret = recv(socket, buff, 1023, 0);
 	fd = 0;
 	if (buff[0] != '\0' && size != 0)
 	{
@@ -100,12 +68,36 @@ int		s_receive_file(char **path, int socket)
 	s_read_file(socket, fd, size);
 	if (fd > 0 || size == 0)
 	{
-		ft_putendl("SUCCESS");
 		close(fd);
+		return (0);
 	}
 	else
-		ft_putendl("ERROR");
+		return (-1);
+}
 
-	ft_putcolorendl("End of Server Receive File", 92);
-	return (0);	
+int			s_receive_file(char **path, int socket)
+{
+	int				ret;
+	char			buff[1024];
+	int				size;
+
+	ft_bzero(buff, 1023);
+	if ((ret = recv(socket, buff, 1023, 0)) == 0)
+		return (0);
+	if (!(ft_strcmp(buff, "file") == 0))
+		return (0);
+	ft_bzero(buff, 1023);
+	send(socket, "", 1, 0);
+	if ((ret = recv(socket, buff, 1023, 0)) == 0)
+		return (0);
+	if ((size = ft_atoi(buff)) == 0)
+	{
+		send(socket, "", 1, 0);
+		ft_putendl("SUCCESS");
+		return (s_create_file(path[1]));
+	}
+	else if (size == -1)
+		return (report(2, socket));
+	send(socket, "", 1, 0);
+	return (fill_file(buff, path, size, socket));
 }

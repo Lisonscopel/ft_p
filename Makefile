@@ -67,7 +67,7 @@ SRCDIR_C = $(SRCDIR)client/
 SRCDIR_S = $(SRCDIR)server/
 
 BINDIR = bin/
-BIN_S = $(addprefix $(BINDIR), $(NAME_S))
+BIN_S = $(addprefix $(BINDIR), $(NAME_SERV))
 BIN_C = $(addprefix $(BINDIR), $(NAME_C))
 
 .PHONY: all clean fclean re proper debug debugall

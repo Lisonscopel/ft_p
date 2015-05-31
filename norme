@@ -1,38 +1,9 @@
-Norme: libnetwork/client_receive.c
-Error: 42 header not at top of the file
-Error (line 3): function c_receive_dir has 46 lines
-Error (line 53): function c_receive_file has 49 lines
-
 Norme: libnetwork/client_send.c
 Error: 42 header not at top of the file
-Error (line 3): declarations in c_send must be at the top of the function
-Error (line 3): function c_send has 40 lines
+Error (line 3): function c_send has 39 lines
 Error (line 3, col 0): c_send has 6 variables
-Error (line 42): Empty line
-
-Norme: libnetwork/includes/libnetwork.h
-Error (line 13): wrong number of spaces in preprocessor line
-Error (line 24): wrong number of spaces in preprocessor indentation
-Error (line 25): wrong number of spaces in preprocessor indentation
-
-Norme: libnetwork/server_receive.c
-Error: global scope bad aligned
-Error: file must end with a single empty line
-Error: 42 header not at top of the file
-Error (line 64): declarations in s_receive_file must be at the top of the function
-Error (line 64): function s_receive_file has 59 lines
-Error (line 77): Empty line
-Error (line 80): Empty line
-Error (line 82): Empty line
-Error (line 84): spaces at the end of line
-Error (line 87): spaces at the end of line
-Error (line 87): bad indentation
-Error (line 100): Empty line
-Error (line 102): spaces at the end of line
-Error (line 122): Empty line
-Error (line 124): spaces at the end of line
-Error (line 124, col 11): bad character after ;
-Error (line 125, col 0): no newline after block
+Error (line 14): Empty line
+Error (line 41): Empty line
 
 Norme: libnetwork/server_send.c
 Error: 42 header not at top of the file
@@ -42,21 +13,3 @@ Error (line 56): multiple empty lines
 Error (line 57): function send_dir has 55 lines
 Error (line 57): bad spacing between send_unique_file and send_dir
 Error (line 77, col 39): space before )
-
-Norme: src/client/client.c
-Error: 42 header not at top of the file
-Warning: src/client/client_ask_put.c may not compile or is invalid for some reasons.
-
-Norme: src/client/dial_server.c
-Error: 42 header not at top of the file
-Error (line 29): Empty line
-Error (line 49): function dial_server has 34 lines
-
-Norme: src/server/dial_client.c
-Error: global scope bad aligned
-Error: 42 header not at top of the file
-
-Norme: src/server/server_ask_put.c
-Error: global scope bad aligned
-Error: 42 header not at top of the file
-Error (line 1): C++ comment

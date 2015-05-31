@@ -2,8 +2,6 @@
 
 int	c_send(char **path, int socket)
 {
-	ft_putcolorendl("Client Send File", 92);
-
 	char			buff[1];
 	char			tmp[1024];
 	int				fd;
@@ -13,6 +11,7 @@ int	c_send(char **path, int socket)
 
 	if (path[1])
 	{
+
 		if ((fd = open(path[1], O_RDONLY)) != -1)
 		{
 			fstat(fd, &st);
