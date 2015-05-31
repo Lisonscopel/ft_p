@@ -6,6 +6,7 @@ int					c_receive_dir(char **path, int socket)
 	int		ret;
 
 	send(socket, "in receive_dir", 14, 0);
+	path[1] = get_path(path[1]);
 	mkdir(path[1], 0755);
 	chdir(path[1]);
 	ret = recv(socket, buff, 1023, 0);
