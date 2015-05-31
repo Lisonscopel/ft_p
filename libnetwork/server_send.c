@@ -53,6 +53,38 @@ int					send_unique_file(char **path, int socket)
 	return (0);
 }
 
+int					dir_handler(char **path)
+{
+	char			**t;
+	int				t_len;
+	int				i;
+
+	t_len = 0;
+	i = 0;
+	t = ft_strsplit(*path, '/');
+	while(t[t_len])
+	{
+		ft_putstr("=>");
+		ft_putendl(t[t_len]);
+		t_len++;
+	}
+	t_len -= 1;
+	if (t_len == 0)
+	{
+		ft_putstr("free\n");
+		free(t);
+		return (0);
+	}
+	while(i < (t_len - 1))
+	{
+		ft_putendl(t[i]);
+		chdir(t[i]);
+		i++;
+	}
+	ft_putnbr(t_len);
+	*path = ft_strdup(t[t_len]);
+	return (t_len);
+}
 
 int					send_dir(char **path, int socket, int depth)
 {
@@ -61,7 +93,12 @@ int					send_dir(char **path, int socket, int depth)
 	char			*tmp_path[3];
 	char			buff[1024];
 	int				ret;
+	int				up;
 
+	up = dir_handler(&path[1]);
+	ft_putstr("=>");
+	ft_putstr(path[1]);
+	ft_putstr("<=\n");
 	ft_putcolorendl(path[1], 35);
 	send(socket, "dir", 3, 0);
 	recv(socket, buff, 14, 0);
@@ -109,6 +146,11 @@ int					send_dir(char **path, int socket, int depth)
 	{
 		send(socket, "capri", 5, 0);
 		chdir("..");
+	}
+	while(up > 0)
+	{
+		chdir("..");
+		up--;
 	}
 	return (1);
 }
