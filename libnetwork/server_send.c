@@ -75,7 +75,7 @@ int					dir_handler(char **path)
 		free(t);
 		return (0);
 	}
-	while(i < (t_len - 1))
+	while(i < (t_len))
 	{
 		ft_putendl(t[i]);
 		chdir(t[i]);
