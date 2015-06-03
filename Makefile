@@ -11,7 +11,6 @@ SRC_S_NAME	=	server.c \
 				server_ask_cd.c \
 				server_ask_ls.c \
 				server_ask_pwd.c \
-				server_ask_put.c \
 				server_password.c \
 				ls_funcs.c \
 				server_report.c \
@@ -20,7 +19,6 @@ SRC_C_NAME	=	client.c \
 				init.c \
 				dial_server.c \
 				ask_quit.c \
-				client_ask_put.c \
 				client_password.c \
 				lc_funcs.c \
 				client_report.c \

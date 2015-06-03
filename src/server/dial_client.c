@@ -1,6 +1,6 @@
 #include "server.h"
 
-void	byte_reception(char **new_av, char *buf, int ret)
+void		byte_reception(char **new_av, char *buf, int ret)
 {
 	ft_putstr("received ");
 	ft_putnbr(ret);
@@ -9,7 +9,7 @@ void	byte_reception(char **new_av, char *buf, int ret)
 	ft_free_tab(new_av);
 }
 
-int		display_prompt(char **new_av, int sock)
+int			display_prompt(char **new_av, int sock)
 {
 	char	*pwd;
 
@@ -39,7 +39,7 @@ static int	cmd_handler(t_fct *tmp, char *buf, char ***new_av, int cs)
 	return (0);
 }
 
-void	dial_client(int cs)
+void		dial_client(int cs)
 {
 	int		ret;
 	char	**new_av;

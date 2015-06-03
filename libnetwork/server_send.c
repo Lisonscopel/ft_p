@@ -1,9 +1,6 @@
 #include "libnetwork.h"
 
-
-
-
-void		do_the_sub_thing(t_deg *l)
+void			do_the_sub_thing(t_deg *l)
 {
 	int		ret;
 
@@ -15,7 +12,7 @@ void		do_the_sub_thing(t_deg *l)
 	send_unique_file(l->tmp_path, l->socket);
 }
 
-int			do_the_thing(t_deg *l)
+int				do_the_thing(t_deg *l)
 {
 	int				ret;
 
@@ -42,7 +39,7 @@ int			do_the_thing(t_deg *l)
 	return (l->depth);
 }
 
-t_deg				*init_deg(char **path, int socket, int depth)
+t_deg			*init_deg(char **path, int socket, int depth)
 {
 	t_deg			*lison;
 
@@ -56,7 +53,7 @@ t_deg				*init_deg(char **path, int socket, int depth)
 	return (lison);
 }
 
-int					send_dir(char **path, int socket, int depth)
+int				send_dir(char **path, int socket, int depth)
 {
 	t_deg			*l;
 	DIR				*d;
@@ -85,7 +82,7 @@ int					send_dir(char **path, int socket, int depth)
 	return (1);
 }
 
-int					s_send(char **path, int socket)
+int				s_send(char **path, int socket)
 {
 	if (!is_dir(path[1]))
 		return (send_unique_file(path, socket));
