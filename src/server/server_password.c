@@ -7,7 +7,6 @@ static char				*get_log(void)
 	char	*path;
 	char	*exec;
 
-	i = 0;
 	tmp = ft_strsplit(getenv("_"), '/');
 	i = 0;
 	path = tmp[0][0] == '.' ? tmp[i++] : "";

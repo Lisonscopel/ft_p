@@ -2,11 +2,9 @@
 
 static int	choose_stuff(char *path, int fd)
 {
-	char			*line;
 
 	ft_putcolor("Existing file : ", 1);
 	ft_putendl("Overwrite");
-	get_next_line(0, &line);
 	close(fd);
 	fd = open(path, O_TRUNC | O_WRONLY);
 	return (fd);
@@ -18,7 +16,6 @@ int			s_create_file(char *path)
 	int				fd;
 
 	good_path = get_path(path);
-	ft_putcolorendl(good_path, 95);
 	if ((fd = open(good_path, O_RDONLY)) != -1)
 		return (choose_stuff(good_path, fd));
 	else

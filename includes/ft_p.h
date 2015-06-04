@@ -7,6 +7,7 @@
 # include <netdb.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+# include <signal.h>
 
 # include "libft.h"
 # include "get_next_line.h"

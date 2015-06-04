@@ -9,7 +9,11 @@ int		client_create_tcp(char *addr, int port)
 	char				*ip;
 
 	prot = getprotobyname("tcp");
-	host = gethostbyname(addr);
+	if ((host = gethostbyname(addr)) == NULL)
+	{
+		printf("Error: Bad <addr>\n");
+		exit (0);
+	}
 	ip = inet_ntoa(*((struct in_addr *)host->h_addr));
 	if (!prot)
 		return (-1);

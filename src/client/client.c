@@ -30,6 +30,11 @@ int			close_sock(int sock)
 	return (0);
 }
 
+void		sig_handle(void)
+{
+	signal(SIGTSTP, SIG_IGN);
+}
+
 int			main(int ac, char **av)
 {
 	int		ret;
@@ -42,13 +47,16 @@ int			main(int ac, char **av)
 		ft_usage(av[0], " <addr> <port>");
 	port = ft_atoi(av[2]);
 	sock = client_create_tcp(av[1], port);
+	sig_handle();
 	if (client_login(sock, &login) == -1)
 		return (close_sock(sock));
 	while (42)
 	{
 		prompt(sock, login);
-		if ((ret = get_next_line(0, &line)) <= 0)
+		if ((ret = get_next_line(0, &line)) < 0)
 			ft_putcolorendl("ERROR", 94);
+		if (ret == 0)
+			exit(0);
 		else if (line[0] != '\0')
 			dial_server(sock, line);
 		free(line);
