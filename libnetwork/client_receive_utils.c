@@ -1,27 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client_receive_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lscopel <lscopel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/06/06 13:03:41 by lscopel           #+#    #+#             */
+/*   Updated: 2015/06/06 13:15:31 by lscopel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libnetwork.h"
 
 static int			choose_stuff(char *path, int fd)
 {
 	char			*line;
+	int				i;
 
 	ft_putendl("\033[0;1mExisting file :\033[0m");
 	ft_putstr("(A)bort, (R)ename, (O)verwrite ? ");
-	get_next_line(0, &line);
-	if (line[0] == 'R')
+	if (get_next_line(0, &line) > 0)
 	{
-		ft_putstr("New name : ");
-		get_next_line(0, &line);
-		close(fd);
-		return (c_create_file(line));
+		if (ft_toupper(line[0]) == 'R')
+		{
+			ft_putstr("New name : ");
+			i = get_next_line(0, &line);
+			line = (i == 0) ? ft_strdup(path) : line;
+			close(fd);
+			return (c_create_file(line));
+		}
+		else if (ft_toupper(line[0]) == 'O')
+		{
+			close(fd);
+			fd = open(path, O_TRUNC | O_WRONLY);
+			return (fd);
+		}
+		free(line);
 	}
-	else if (line[0] == 'O')
-	{
-		close(fd);
-		fd = open(path, O_TRUNC | O_WRONLY);
-		return (fd);
-	}
-	else
-		close(fd);
+	close(fd);
 	return (0);
 }
 

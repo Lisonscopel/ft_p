@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dial_client.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lscopel <lscopel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/06/06 13:03:41 by lscopel           #+#    #+#             */
+/*   Updated: 2015/06/06 13:34:24 by lscopel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "server.h"
 
 void		byte_reception(char **new_av, char *buf, int ret)
@@ -24,7 +36,6 @@ static int	cmd_handler(t_fct *tmp, char *buf, char ***new_av, int cs)
 	int		bool;
 
 	*new_av = ft_strsplit_blank(buf);
-	printf("av[0] = %s\n", *new_av[0]);
 	bool = 0;
 	while (tmp != NULL)
 	{
@@ -53,10 +64,7 @@ void		dial_client(int cs)
 	{
 		buf[ret] = '\0';
 		if (cmd_handler(tmp, buf, &new_av, cs) == 0)
-		{
-			ft_putcolorendl(new_av[0], 31);
 			server_report(3, cs);
-		}
 		byte_reception(new_av, buf, ret);
 	}
 }

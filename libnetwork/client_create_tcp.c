@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client_create_tcp.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lscopel <lscopel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/06/06 13:03:41 by lscopel           #+#    #+#             */
+/*   Updated: 2015/06/06 13:15:26 by lscopel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libnetwork.h"
 
 int		client_create_tcp(char *addr, int port)
@@ -9,7 +21,11 @@ int		client_create_tcp(char *addr, int port)
 	char				*ip;
 
 	prot = getprotobyname("tcp");
-	host = gethostbyname(addr);
+	if ((host = gethostbyname(addr)) == NULL)
+	{
+		printf("Error: Bad <addr>\n");
+		exit (0);
+	}
 	ip = inet_ntoa(*((struct in_addr *)host->h_addr));
 	if (!prot)
 		return (-1);

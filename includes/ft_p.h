@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_p.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lscopel <lscopel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/06/06 13:03:41 by lscopel           #+#    #+#             */
+/*   Updated: 2015/06/06 13:09:27 by lscopel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_P_H
 # define FT_P_H
 # include <stdio.h>
@@ -7,6 +19,7 @@
 # include <netdb.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+# include <signal.h>
 
 # include "libft.h"
 # include "get_next_line.h"

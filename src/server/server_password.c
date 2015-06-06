@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server_password.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lscopel <lscopel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/06/06 13:03:41 by lscopel           #+#    #+#             */
+/*   Updated: 2015/06/06 13:16:35 by lscopel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "server.h"
 
 static char				*get_log(void)
@@ -7,7 +19,6 @@ static char				*get_log(void)
 	char	*path;
 	char	*exec;
 
-	i = 0;
 	tmp = ft_strsplit(getenv("_"), '/');
 	i = 0;
 	path = tmp[0][0] == '.' ? tmp[i++] : "";

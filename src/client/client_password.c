@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client_password.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lscopel <lscopel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/06/06 13:03:41 by lscopel           #+#    #+#             */
+/*   Updated: 2015/06/06 13:16:02 by lscopel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "client.h"
 
 int		client_login(int sock, char **login)
@@ -5,13 +17,16 @@ int		client_login(int sock, char **login)
 	char	buff[1024];
 	char	*line;
 	char	*line2;
+	int		i;
 
 	send(sock, "okcbon", 7, 0);
 	ft_putendl("Login:");
-	get_next_line(0, &line);
+	if ((i = get_next_line(0, &line)) == 0)
+		exit(0);
 	*login = ft_strdup(line);
 	ft_putendl("Password:");
-	get_next_line(0, &line2);
+	if ((i = get_next_line(0, &line2)) == 0)
+		exit(0);
 	line = ft_strjoin(line, ":");
 	line = ft_strjoin(line, line2);
 	recv(sock, buff, 1023, 0);
@@ -22,8 +37,6 @@ int		client_login(int sock, char **login)
 		ft_putendl("Wrong Password you jerk");
 		return (-1);
 	}
-	ft_putstr("Welcome ");
-	ft_putcolor(*login, 1);
-	ft_putendl(" !");
+	printf("Welcome %s !\n", *login);
 	return (0);
 }
